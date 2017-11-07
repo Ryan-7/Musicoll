@@ -3,10 +3,12 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
