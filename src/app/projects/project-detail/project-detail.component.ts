@@ -9,10 +9,11 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class ProjectDetailComponent implements OnInit {
 
-  songSelected = false;
 
   constructor(private activatedRoute: ActivatedRoute) { 
   }
+
+  songId; 
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: Params) => {
