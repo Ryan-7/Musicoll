@@ -4,7 +4,9 @@ import { ProjectsComponent } from './projects/projects.component';
 import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
-    { path: 'projects', component: ProjectsComponent },
+    { path: 'projects', component: ProjectsComponent, children: [
+        {path: ':id', component: ProjectsComponent}
+    ] },
     { path: '', component: LandingComponent}
 ];
 
