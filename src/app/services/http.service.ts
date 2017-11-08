@@ -34,6 +34,48 @@ export class HttpService {
         }
       ]
 
+    },
+    {
+      _id: "34387438402",
+      _creator: "38203034f-3fk30",
+      name: 'something new',
+      lyrics: 'lyrics and stuff',
+      notes: 'lots of notes',
+      audio: [
+        {
+          file: 'someFile.mp3',
+          description: 'some description of audio file'
+        }
+      ],
+      comments: [
+        {
+          author: "Ryan",
+          date: new Date(),
+          body: "This is some comment"
+        }
+      ]
+
+    },
+    {
+      _id: "34383738402",
+      _creator: "38203034f-3fk30",
+      name: 'great thing',
+      lyrics: 'lyrics and stuff',
+      notes: 'lots of notes',
+      audio: [
+        {
+          file: 'someFile.mp3',
+          description: 'some description of audio file'
+        }
+      ],
+      comments: [
+        {
+          author: "Ryan",
+          date: new Date(),
+          body: "This is some comment"
+        }
+      ]
+
     }
   ]
 
