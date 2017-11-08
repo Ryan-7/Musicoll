@@ -10,6 +10,8 @@ import { ProjectsComponent } from './projects/projects.component';
 import { LandingComponent } from './landing/landing.component';
 import { HttpService } from './services/http.service';
 import { ProjectDetailComponent } from './projects/project-detail/project-detail.component';
+import { ProjectLandingComponent } from './projects/project-landing/project-landing.component';
+import { SearchPipe } from './shared/search.pipe';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { ProjectDetailComponent } from './projects/project-detail/project-detail
     HeaderComponent,
     ProjectsComponent,
     LandingComponent,
-    ProjectDetailComponent
+    ProjectDetailComponent,
+    ProjectLandingComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,

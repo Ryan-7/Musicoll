@@ -1,3 +1,4 @@
+import { HttpService } from './../services/http.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
 
+  projects: any;
 
-  constructor() { 
+  constructor(private httpService: HttpService) { 
   }
 
   ngOnInit() {
-
+    this.projects = this.httpService.mockData;
+    console.log(this.projects[0].name);
   }
 
 }

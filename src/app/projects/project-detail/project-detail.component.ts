@@ -9,10 +9,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class ProjectDetailComponent implements OnInit {
 
-  
+  songSelected = false;
+
   constructor(private activatedRoute: ActivatedRoute) { 
-
-
   }
 
   ngOnInit() {
