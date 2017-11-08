@@ -8,6 +8,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { HeaderComponent } from './header/header.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { LandingComponent } from './landing/landing.component';
+import { HttpService } from './services/http.service';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { LandingComponent } from './landing/landing.component';
     AppRoutingModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [],
+  providers: [HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
