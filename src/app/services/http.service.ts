@@ -17,7 +17,7 @@ export class HttpService {
     {
       _id: "3438738402",
       _creator: "38203034f-3fk30",
-      name: 'Awesome project',
+      name: 'Awesome Project',
       lyrics: 'lyrics and stuff',
       notes: 'lots of notes',
       audio: [
@@ -38,7 +38,7 @@ export class HttpService {
     {
       _id: "34387438402",
       _creator: "38203034f-3fk30",
-      name: 'something new',
+      name: 'Something New with Really long name',
       lyrics: 'lyrics and stuff',
       notes: 'lots of notes',
       audio: [
@@ -59,7 +59,28 @@ export class HttpService {
     {
       _id: "34383738402",
       _creator: "38203034f-3fk30",
-      name: 'great thing',
+      name: 'Great Thing Idea',
+      lyrics: 'lyrics and stuff',
+      notes: 'lots of notes',
+      audio: [
+        {
+          file: 'someFile.mp3',
+          description: 'some description of audio file'
+        }
+      ],
+      comments: [
+        {
+          author: "Ryan",
+          date: new Date(),
+          body: "This is some comment"
+        }
+      ]
+
+    },
+    {
+      _id: "3438373438402",
+      _creator: "38203034f-3fk30",
+      name: 'Project of the Century',
       lyrics: 'lyrics and stuff',
       notes: 'lots of notes',
       audio: [
