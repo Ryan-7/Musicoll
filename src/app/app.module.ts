@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { LandingComponent } from './landing/landing.component';
 import { HttpService } from './services/http.service';
+import { ProjectDetailComponent } from './projects/project-detail/project-detail.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { HttpService } from './services/http.service';
     AppComponent,
     HeaderComponent,
     ProjectsComponent,
-    LandingComponent
+    LandingComponent,
+    ProjectDetailComponent
   ],
   imports: [
     BrowserModule,
