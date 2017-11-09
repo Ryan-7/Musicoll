@@ -13,6 +13,9 @@ import { ProjectDetailComponent } from './projects/project-detail/project-detail
 import { ProjectLandingComponent } from './projects/project-landing/project-landing.component';
 import { SearchPipe } from './shared/search.pipe';
 import { ShortenPipe } from './shared/shorten.pipe';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { SignupComponent } from './signup/signup.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import { ShortenPipe } from './shared/shorten.pipe';
     ProjectDetailComponent,
     ProjectLandingComponent,
     SearchPipe,
-    ShortenPipe
+    ShortenPipe,
+    SignInComponent,
+    SignupComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
