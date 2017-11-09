@@ -1,5 +1,12 @@
+
+
+<div class="spinner-container">
+        <i class="fa fa-spinner fa-spin spinner text-center" *ngIf="loading" aria-hidden="true"></i>
+</div>
+
+<div *ngIf="!loading">
 <div class="jumbotron">
-        <h1 class="h1-responsive">Hello, Ryan!</h1>
+        <h1 class="h1-responsive">{{ project.name }}</h1>
 
         <hr>
 
@@ -16,3 +23,4 @@
                 <a class="btn btn-deep-orange">Go somewhere</a>
             </div>
         </div>
+    </div>

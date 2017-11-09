@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as _ from 'lodash';
 
 @Injectable()
 export class HttpService {
@@ -11,6 +12,10 @@ export class HttpService {
 
   getProjectList() {
     return this.mockData.slice();
+  }
+
+  getProjectById(projectId) {
+    return _.find(this.mockData, {_id: projectId}); 
   }
 
   mockData = [
