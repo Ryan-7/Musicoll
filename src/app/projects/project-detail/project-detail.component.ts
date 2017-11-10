@@ -1,5 +1,5 @@
 import { HttpService } from './../../services/http.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -9,6 +9,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class ProjectDetailComponent implements OnInit {
 
+  @ViewChild('title') theTitle;
 
   constructor(private activatedRoute: ActivatedRoute, private httpService: HttpService) { 
   }
@@ -16,9 +17,23 @@ export class ProjectDetailComponent implements OnInit {
   project; 
   projectId;
   loading: boolean = true;
+  editTitle: boolean = false;
+
+  editingTitle() {
+    this.editTitle = true;
+    console.log(this.theTitle)
+    
+    setTimeout(() => { this.theTitle.nativeElement.focus(); });
+  }
+
+  savingTitle() {
+    this.editTitle = false;
+    console.log(this.theTitle)
+  }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: Params) => {
+      this.editTitle = false;
       this.loading = true;
       console.log(params)
       console.log(params.get('id'));
@@ -28,11 +43,9 @@ export class ProjectDetailComponent implements OnInit {
 
       setTimeout(() => {
         this.loading = false;
-      }, 1000)
+      }, 500)
       
     })
-
-    
     // use id to hit database 
 
   }

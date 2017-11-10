@@ -1,5 +1,6 @@
 .jumbotron {
     margin-top: 50px;
+    transition: .5s;
 }
 
 .spinner-container {
@@ -18,3 +19,21 @@
     width: 100px;
     z-index: 3;
 }
+
+.edit-title {
+    color: #4E7BEE;
+    font-size: 20px;
+    padding-left: 10px;
+    transition: .25s;
+}
+
+.edit-title:hover {
+    color: #4E7BEE;
+    cursor: pointer;
+}
+
+input {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 400 !important;
+ }

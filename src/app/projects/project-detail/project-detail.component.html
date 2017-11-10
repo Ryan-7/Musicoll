@@ -6,7 +6,16 @@
 
 <div *ngIf="!loading">
 <div class="jumbotron">
-        <h1 class="h1-responsive">{{ project.name }}</h1>
+
+        <h1 *ngIf="!editTitle" class="h1-responsive">{{ project.name }} <i (click)="editingTitle()" class="fa fa-pencil edit-title inline-block" aria-hidden="true"></i></h1>
+        
+        <div *ngIf="editTitle">
+        <div class="md-form">
+                <input type="text" id="form1" class="form-control" #title value="{{ project.name }}">
+        </div>
+        <button class="btn btn-sm btn-primary" (click)="savingTitle()">Save</button>
+        <button class="btn btn-sm btn-danger" (click)="savingTitle()">Cancel</button>
+        </div>
 
         <hr>
 
