@@ -1,5 +1,4 @@
 <div class="toolbar animated slideInRight">
-    <!-- <i class="fa fa-wrench" aria-hidden="true"></i> -->
     <div class="inline-block">
         <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Export PDF
     </div>
@@ -11,36 +10,69 @@
     </div>
 </div>
 
+ 
 <div class="spinner-container">
         <i class="fa fa-spinner fa-spin spinner text-center" *ngIf="loading" aria-hidden="true"></i>
 </div>
 
 <div *ngIf="!loading">
-<div class="jumbotron">
+    <div class="jumbotron">
 
-        <h1 *ngIf="!editTitle" class="h1-responsive">{{ project.name }} <i (click)="editingTitle()" class="fa fa-pencil edit-title inline-block" aria-hidden="true"></i></h1>
-        
-        <div *ngIf="editTitle">
-        <div class="md-form">
+        <!-- Title -->
+        <p>Title | <span (click)="edit('title')" class="edit">Edit</span></p>
+        <h1 *ngIf="!editingTitle" class="h1-responsive">{{ project.name }}</h1>
+
+        <div *ngIf="editingTitle">
+            <div class="md-form">
                 <input type="text" id="form1" class="form-control" #title value="{{ project.name }}">
+            </div>
+            <button class="btn btn-sm btn-primary" (click)="save('title')">Save</button>
+            <button class="btn btn-sm btn-danger" (click)="cancel('title')">Cancel</button>
         </div>
-        <button class="btn btn-sm btn-primary" (click)="savingTitle()">Save</button>
-        <button class="btn btn-sm btn-danger" (click)="savingTitle()">Cancel</button>
-        </div>
-
         <hr>
 
-      </div>
-
-
-      <div class="card">
-            <div class="card-header deep-orange lighten-1 white-text">
-                Featured
+        <!-- Lyrics -->
+        <p>Lyrics | <span (click)="edit('lyrics')" class="edit">Expand</span> | <span (click)="edit('lyrics')" class="edit">Edit</span></p>
+        
+        <div *ngIf="editingLyrics">
+            <div class="md-form">
+                <textarea type="text" class="md-textarea lyrics lyrics-edit" #lyrics autosize>{{ project.lyrics }}</textarea>
             </div>
-            <div class="card-body">
-                <h4 class="card-title">Special title treatment</h4>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a class="btn btn-deep-orange">Go somewhere</a>
+            <button class="btn btn-sm btn-primary" (click)="save('lyrics')">Save</button>
+            <button class="btn btn-sm btn-danger" (click)="cancel('lyrics')">Cancel</button>
+        </div>
+
+        <div *ngIf="!editingLyrics" class="lyrics">
+            {{ project.lyrics }}
+        </div>
+        <hr>
+
+        <!-- Notes -->
+        <p>Notes | <span (click)="edit('notes')" class="edit">Edit</span></p>
+        <div *ngIf="editingNotes">
+            <div class="md-form">
+                <textarea type="text" class="md-textarea notes notes-edit" #notes autosize>{{ project.notes }}</textarea>
             </div>
+            <button class="btn btn-sm btn-primary" (click)="save('notes')">Save</button>
+            <button class="btn btn-sm btn-danger" (click)="cancel('notes')">Cancel</button>
+        </div>
+        <div *ngIf="!editingNotes" class="notes">
+                {{ project.notes }}
         </div>
     </div>
+
+
+
+</div>
+
+<div class="card text-center">
+    <div class="card-header primary-color white-text">
+        Discussion
+    </div>
+    <div class="card-body"> 
+
+
+    </div>
+    <div class="card-footer text-muted primary-color white-text">
+    </div>
+</div>
