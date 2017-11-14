@@ -32,8 +32,8 @@
         <hr>
 
         <!-- Lyrics -->
-        <p>Lyrics | <span (click)="edit('lyrics')" class="edit">Edit</span></p>
-
+        <p>Lyrics | <span (click)="edit('lyrics')" class="edit">Expand</span> | <span (click)="edit('lyrics')" class="edit">Edit</span></p>
+        
         <div *ngIf="editingLyrics">
             <div class="md-form">
                 <textarea type="text" class="md-textarea lyrics" #lyrics autosize>{{ project.lyrics }}</textarea>
@@ -46,10 +46,19 @@
             {{ project.lyrics }}
         </div>
         <hr>
-        
-        <!-- Notes -->
-        <p>Notes | <span class="edit">Edit</span></p>
 
+        <!-- Notes -->
+        <p>Notes | <span (click)="edit('notes')" class="edit">Edit</span></p>
+        <div *ngIf="editingNotes">
+            <div class="md-form">
+                <textarea type="text" class="md-textarea notes" #notes autosize>{{ project.notes }}</textarea>
+            </div>
+            <button class="btn btn-sm btn-primary" (click)="save('notes')">Save</button>
+            <button class="btn btn-sm btn-danger" (click)="cancel('notes')">Cancel</button>
+        </div>
+        <div *ngIf="!editingNotes" class="notes">
+                {{ project.notes }}
+        </div>
     </div>
 
 

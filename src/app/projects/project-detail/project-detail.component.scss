@@ -103,9 +103,14 @@ input {
     height: auto;
     position: relative;
     bottom: 20px;
-    
  }
 
+.notes {
+    text-align: left;
+    font-weight: 300;
+}
+
  textarea.md-textarea {
-     padding: 0 0 10px 0 ; 
+     padding: 0 0 10px 0;
+     font-weight: 400; 
  }

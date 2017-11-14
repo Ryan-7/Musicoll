@@ -38,6 +38,7 @@ export class ProjectDetailComponent implements OnInit {
           break;
       case 'notes':
           this.editingNotes = true;
+          setTimeout(() => { this.notes.nativeElement.focus(); });
           break;
     }    
   }
