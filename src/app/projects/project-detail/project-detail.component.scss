@@ -103,13 +103,26 @@ input {
     height: auto;
     position: relative;
     bottom: 20px;
+    font-size: .9rem;
+    color: #747373;
+    font-weight: 400;
+ }
+
+ .lyrics-edit {
+     color: black;
  }
 
 .notes {
     text-align: left;
     font-weight: 300;
+    font-size: .9rem;
+    color: #747373;
+    font-weight: 400;
 }
 
+.notes-edit {
+    color: black;
+}
  textarea.md-textarea {
      padding: 0 0 10px 0;
      font-weight: 400; 

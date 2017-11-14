@@ -36,7 +36,7 @@
         
         <div *ngIf="editingLyrics">
             <div class="md-form">
-                <textarea type="text" class="md-textarea lyrics" #lyrics autosize>{{ project.lyrics }}</textarea>
+                <textarea type="text" class="md-textarea lyrics lyrics-edit" #lyrics autosize>{{ project.lyrics }}</textarea>
             </div>
             <button class="btn btn-sm btn-primary" (click)="save('lyrics')">Save</button>
             <button class="btn btn-sm btn-danger" (click)="cancel('lyrics')">Cancel</button>
@@ -51,7 +51,7 @@
         <p>Notes | <span (click)="edit('notes')" class="edit">Edit</span></p>
         <div *ngIf="editingNotes">
             <div class="md-form">
-                <textarea type="text" class="md-textarea notes" #notes autosize>{{ project.notes }}</textarea>
+                <textarea type="text" class="md-textarea notes notes-edit" #notes autosize>{{ project.notes }}</textarea>
             </div>
             <button class="btn btn-sm btn-primary" (click)="save('notes')">Save</button>
             <button class="btn btn-sm btn-danger" (click)="cancel('notes')">Cancel</button>
@@ -62,14 +62,16 @@
     </div>
 
 
-      <div class="card">
-            <div class="card-header deep-orange lighten-1 white-text">
-                Featured
-            </div>
-            <div class="card-body">
-                <h4 class="card-title">Special title treatment</h4>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a class="btn btn-deep-orange">Go somewhere</a>
-            </div>
-        </div>
+
+</div>
+
+<div class="card text-center">
+    <div class="card-header primary-color white-text">
+    </div>
+    <div class="card-body"> 
+
+
+    </div>
+    <div class="card-footer text-muted primary-color white-text">
+    </div>
 </div>
