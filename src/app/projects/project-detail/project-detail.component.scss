@@ -10,7 +10,7 @@
     border-radius: 3px;
     color: white;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-    transition: 1s;
+    transition: .5s;
     z-index: 5;
 }
 
@@ -61,7 +61,7 @@
 
 .edit-title {
     color: #4E7BEE;
-    font-size: 20px;
+    font-size: 16px;
     padding-left: 10px;
     transition: .25s;
 }
@@ -75,4 +75,19 @@ input {
     text-align: center;
     font-size: 36px;
     font-weight: 400 !important;
+ }
+
+ .edit {
+     color: #4E7BEE;
+     transition: .5s;
+ }
+
+ .edit:hover {
+     color: red;
+     cursor: pointer;
+ }
+
+ p {
+     text-align: left;
+     transition: .5s;
  }
