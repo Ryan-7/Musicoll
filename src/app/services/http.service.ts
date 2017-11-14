@@ -23,7 +23,7 @@ export class HttpService {
       _id: "3438738402",
       _creator: "38203034f-3fk30",
       name: 'Awesome Project',
-      lyrics: '\nwords and stuff\nand a new line\nand a new line\nand a new line\nwords and stuff\nand a new line\nand a new line\nand a new line',
+      lyrics: '\nLorem ipsum dolor sit ame\nconsectetur adipiscing elit\nsed do eiusmod tempor incididunt\ndtlabore et dolore magna aliqua\nUt enim ad minim veniam, quis nostrud\nexercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat\nLorem ipsum dolor sit ame\nconsectetur adipiscing elit\nsed do eiusmod tempor incididunt\ndtlabore et dolore magna aliqua\nUt enim ad minim veniam, quis nostrud\nexercitation ullamco laboris nisi ut\naliquip ex ea commodo consequat',
       notes: 'The song is written in the key of C#',
       audio: [
         {
