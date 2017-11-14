@@ -14,7 +14,7 @@ export class ProjectDetailComponent implements OnInit {
   @ViewChild('notes') notes;
 
   constructor(private activatedRoute: ActivatedRoute, private httpService: HttpService) { 
-  }
+  } 
 
   project; 
   projectId;

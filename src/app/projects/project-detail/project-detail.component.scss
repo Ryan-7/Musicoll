@@ -86,10 +86,14 @@ input {
      color: red;
      cursor: pointer;
  }
-
+ 
  p {
      text-align: left;
      transition: .5s;
+ }
+
+ h1 {
+     padding-bottom: 20px;
  }
 
  .lyrics {
@@ -97,8 +101,11 @@ input {
     white-space: pre;
     font-weight: 300;
     height: auto;
+    position: relative;
+    bottom: 20px;
+    
  }
 
- .md-textarea {
-     height: auto !important; 
+ textarea.md-textarea {
+     padding: 0 0 10px 0 ; 
  }

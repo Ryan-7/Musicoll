@@ -10,7 +10,7 @@
     </div>
 </div>
 
-
+ 
 <div class="spinner-container">
         <i class="fa fa-spinner fa-spin spinner text-center" *ngIf="loading" aria-hidden="true"></i>
 </div>
@@ -36,7 +36,7 @@
 
         <div *ngIf="editingLyrics">
             <div class="md-form">
-                <textarea type="text" class="md-textarea lyrics" #lyrics >{{ project.lyrics }}</textarea>
+                <textarea type="text" class="md-textarea lyrics" #lyrics autosize>{{ project.lyrics }}</textarea>
             </div>
             <button class="btn btn-sm btn-primary" (click)="save('lyrics')">Save</button>
             <button class="btn btn-sm btn-danger" (click)="cancel('lyrics')">Cancel</button>
@@ -45,7 +45,8 @@
         <div *ngIf="!editingLyrics" class="lyrics">
             {{ project.lyrics }}
         </div>
-
+        <hr>
+        
         <!-- Notes -->
         <p>Notes | <span class="edit">Edit</span></p>
 
