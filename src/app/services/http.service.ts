@@ -23,8 +23,8 @@ export class HttpService {
       _id: "3438738402",
       _creator: "38203034f-3fk30",
       name: 'Awesome Project',
-      lyrics: 'lyrics and stuff',
-      notes: 'lots of notes',
+      lyrics: '\nwords and stuff\nand a new line\nand a new line\nand a new line',
+      notes: 'The song is written in the key of C#',
       audio: [
         {
           file: 'someFile.mp3',
@@ -44,8 +44,8 @@ export class HttpService {
       _id: "34387438402",
       _creator: "38203034f-3fk30",
       name: 'Something New with Really long name',
-      lyrics: 'lyrics and stuff',
-      notes: 'lots of notes',
+      lyrics: 'lyrics and stuff \nand a new line',
+      notes: 'The song is written in the key of F#',
       audio: [
         {
           file: 'someFile.mp3',
@@ -65,8 +65,8 @@ export class HttpService {
       _id: "34383738402",
       _creator: "38203034f-3fk30",
       name: 'Great Thing Idea',
-      lyrics: 'lyrics and stuff',
-      notes: 'lots of notes',
+      lyrics: 'lyrics and stuff \nand a new line',
+      notes: 'The song is written in the key of B flat.',
       audio: [
         {
           file: 'someFile.mp3',

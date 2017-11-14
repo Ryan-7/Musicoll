@@ -91,3 +91,14 @@ input {
      text-align: left;
      transition: .5s;
  }
+
+ .lyrics {
+    text-align: center;
+    white-space: pre;
+    font-weight: 300;
+    height: auto;
+ }
+
+ .md-textarea {
+     height: auto !important; 
+ }
