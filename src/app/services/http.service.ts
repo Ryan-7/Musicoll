@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http, RequestOptions, ResponseOptions } from '@angular/http';
 import * as _ from 'lodash';
 
 @Injectable()
 export class HttpService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
 
   // Each project will consist of the following model: 
 
+  newProject() {
+    return this.httpClient.get('http://localhost:3000/api/projects/new')
+  }
+  
   getProjectList() {
     return this.mockData.slice();
   }
@@ -17,6 +22,7 @@ export class HttpService {
   getProjectById(projectId) {
     return _.find(this.mockData, {_id: projectId}); 
   }
+
 
   mockData = [
     {

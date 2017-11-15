@@ -1,6 +1,6 @@
 import { HttpService } from './../services/http.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 
 @Component({
@@ -14,8 +14,16 @@ export class ProjectsComponent implements OnInit {
   filteredProject: String = "";
 
 
-  constructor(private httpService: HttpService, private activatedRoute: ActivatedRoute) { 
+  constructor(private httpService: HttpService, private activatedRoute: ActivatedRoute, private router: Router) { 
   } 
+
+  newProject() {
+    this.httpService.newProject().subscribe((res) => {
+      let projectId = res;
+      // do another get request to update project listing
+      this.router.navigate(['projects/'+ projectId]);
+    })
+  }
 
   ngOnInit() {
     this.activatedRoute.url.subscribe((res) => {

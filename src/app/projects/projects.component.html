@@ -2,7 +2,7 @@
 <div class="row text-center"> 
     <div class="col-md-3 sidebar">
       <h3>Project List</h3>
-      <button class="btn btn-primary">New Project</button>
+      <button class="btn btn-primary" (click)="newProject()">New Project</button>
       <div class="md-form form-sm">
           <input type="text" id="form1" class="form-control" placeholder="Search" [(ngModel)]="filteredProject">
       </div>
