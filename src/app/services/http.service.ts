@@ -12,11 +12,11 @@ export class HttpService {
   // Each project will consist of the following model: 
 
   newProject() {
-    return this.httpClient.get('http://localhost:3000/api/projects/new')
+    return this.httpClient.get('http://localhost:3000/api/projects/new');
   }
   
   getProjectList() {
-    return this.mockData.slice();
+    return this.httpClient.get('http://localhost:3000/api/projects/list');
   }
 
   getProjectById(projectId) {

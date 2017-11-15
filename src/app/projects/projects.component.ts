@@ -15,23 +15,24 @@ export class ProjectsComponent implements OnInit {
 
 
   constructor(private httpService: HttpService, private activatedRoute: ActivatedRoute, private router: Router) { 
-  } 
+  }
+
 
   newProject() {
     this.httpService.newProject().subscribe((res) => {
       let projectId = res;
-      // do another get request to update project listing
-      this.router.navigate(['projects/'+ projectId]);
+      this.router.navigate(['projects/'+ projectId]); // Route after New project created 
+      this.getProjectList(); // Update Project List
+    });
+  }
+
+  getProjectList() {
+    this.httpService.getProjectList().subscribe((res) => {
+      this.projects = res;
     })
   }
 
   ngOnInit() {
-    this.activatedRoute.url.subscribe((res) => {
-      console.log(res)
-    })
-
-    this.projects = this.httpService.mockData;
-    console.log(this.projects[0].name);
+    this.getProjectList();
   }
-
 }
