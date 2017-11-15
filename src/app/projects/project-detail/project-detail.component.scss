@@ -126,8 +126,23 @@ input {
  textarea.md-textarea {
      padding: 0 0 10px 0;
      font-weight: 400; 
+     margin: 0 auto;
  }
 
- .card {
-     margin-top: 50px;
+ .card-header, .card-body {
+     text-align: left;
+     color: #747373;
  }
+ .card-header {
+     font-size: 12px;
+ }
+
+ .btn-comment {
+     margin-bottom: 40px;
+ }
+
+ .list-small {
+     width: 50%;
+     margin: 0 auto;
+ }
+

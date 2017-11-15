@@ -28,7 +28,9 @@ export class HttpService {
       audio: [
         {
           file: 'someFile.mp3',
-          description: 'some description of audio file'
+          title: 'some title',
+          description: 'some description of audio file',
+          date: new Date()
         }
       ],
       comments: [
