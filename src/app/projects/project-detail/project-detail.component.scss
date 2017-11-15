@@ -94,6 +94,7 @@ input {
 
  h1 {
      padding-bottom: 20px;
+     color: #777576;
  }
 
  .lyrics {
@@ -146,3 +147,11 @@ input {
      margin: 0 auto;
  }
 
+.jumbotron {
+    border-top: 20px solid #00CB5F;
+    border-bottom: 20px solid #00CB5F;
+}
+
+p {
+    font-weight: 400;
+}
