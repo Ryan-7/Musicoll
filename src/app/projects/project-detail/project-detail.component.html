@@ -31,6 +31,35 @@
         </div>
         <hr>
 
+        <!-- Tracks -->
+
+        <p>Tracks | <span (click)="edit()" class="edit">Edit</span></p>
+        <audio controls>
+                <source src="horse.ogg" type="audio/ogg">
+                <source src="horse.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+        </audio><br><br>
+        <button class="btn btn-sm btn-info">Upload Audio</button>
+        <button class="btn btn-sm btn-success">Record Audio</button>
+
+<br><br>
+
+        <div class="list-group list-small">
+                <div class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">Guitar Rhythm</h5>
+                    <small>3 days ago</small>
+                  </div>
+                  <p class="mb-1">Acoustic rhythm without any lead or melody added.</p>
+                  <button class="btn btn-sm btn-warning center-block">Play</button>
+                  <button class="btn btn-sm btn-secondary center-block">Download</button>
+                  <button class="btn btn-sm btn-danger center-block">Delete</button>
+                </div>
+              </div>
+
+
+  
+        <hr>
         <!-- Lyrics -->
         <p>Lyrics | <span (click)="edit('lyrics')" class="edit">Expand</span> | <span (click)="edit('lyrics')" class="edit">Edit</span></p>
         
@@ -59,20 +88,7 @@
         <div *ngIf="!editingNotes" class="notes">
                 {{ project.notes }}
         </div>
-    </div>
-
-
-
-</div>
-
-<div class="card text-center">
-    <div class="card-header primary-color white-text">
-        Discussion
-    </div>
-    <div class="card-body"> 
-
 
     </div>
-    <div class="card-footer text-muted primary-color white-text">
-    </div>
+    
 </div>
