@@ -16,8 +16,7 @@ export class ProjectDetailComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private httpService: HttpService) { 
   } 
 
-  project; 
-  projectId;
+  project; // need to add model 
   loading: boolean = true;
   
   editingTitle: boolean = false;
@@ -52,10 +51,11 @@ export class ProjectDetailComponent implements OnInit {
           break;
       case 'lyrics':
           this.editingLyrics = false;
-       //   dataToSave = this.lyrics.nativeElement.value;
+          dataToSave = this.lyrics.nativeElement.value;
           break;
       case 'notes':
           this.editingNotes = false;
+          dataToSave = this.notes.nativeElement.value;
           break;
     }
     this.update(dataToSave);
@@ -78,20 +78,20 @@ export class ProjectDetailComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: Params) => {
-      this.editingTitle = false;
       this.loading = true;
-      console.log(params)
-      console.log(params.get('id'));
-      this.projectId = params.get('id');
-      this.project = this.httpService.getProjectById(this.projectId) // put loader in here once subscribed, 
-      console.log(this.project)
+      let projectId = params.get('id');
+      
+      this.httpService.getProjectById(projectId).subscribe((res) => {
+        this.project = res;
+        // In real world, set loading back to false here. 
+      })
+
 
       setTimeout(() => {
         this.loading = false;
       }, 500)
       
     })
-    // use id to hit database 
 
   }
 
