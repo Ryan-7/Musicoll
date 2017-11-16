@@ -1,6 +1,7 @@
+import { ProjectsComponent } from './../projects.component';
 import { HttpService } from './../../services/http.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
   selector: 'app-project-detail',
@@ -13,17 +14,29 @@ export class ProjectDetailComponent implements OnInit {
   @ViewChild('lyrics') lyrics;
   @ViewChild('notes') notes;
 
-  constructor(private activatedRoute: ActivatedRoute, private httpService: HttpService) { 
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private httpService: HttpService, private projectsComponent: ProjectsComponent) { 
   } 
 
-  project; 
-  projectId;
+  project; // need to add model 
+  projectId; // need to add model 
   loading: boolean = true;
   
   editingTitle: boolean = false;
   editingLyrics: boolean = false;
   editingNotes: boolean = false;
 
+  deleteProject() {
+    this.loading = true;
+    this.httpService.deleteProject(this.projectId).subscribe((res) => {
+
+      setTimeout(() => { // only used to simulate http request time 
+        this.projectsComponent.getProjectList(); 
+        this.loading = false;
+        this.router.navigate(['projects']);
+      }, 500)
+
+    })
+  }
 
   edit(inputArea) {
     console.log(inputArea)
@@ -52,10 +65,11 @@ export class ProjectDetailComponent implements OnInit {
           break;
       case 'lyrics':
           this.editingLyrics = false;
-       //   dataToSave = this.lyrics.nativeElement.value;
+          dataToSave = this.lyrics.nativeElement.value;
           break;
       case 'notes':
           this.editingNotes = false;
+          dataToSave = this.notes.nativeElement.value;
           break;
     }
     this.update(dataToSave);
@@ -73,25 +87,30 @@ export class ProjectDetailComponent implements OnInit {
 
   update(dataToSave) {
     console.log(dataToSave);
-    // talk to http service 
+    // talk to http service using the id
   }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: Params) => {
-      this.editingTitle = false;
       this.loading = true;
-      console.log(params)
-      console.log(params.get('id'));
       this.projectId = params.get('id');
-      this.project = this.httpService.getProjectById(this.projectId) // put loader in here once subscribed, 
-      console.log(this.project)
+      
+      // everytime the params change, we will query the API for that project id's data.
 
-      setTimeout(() => {
+      this.httpService.getProjectById(this.projectId).subscribe((res) => {
+        this.project = res;
+        // In real world, set loading back to false here. 
+      })
+
+      // if error trying to get id, show a "project not found"
+      // could re-direct to error page... ?
+
+
+      setTimeout(() => { // Simulate HTTP request time 
         this.loading = false;
       }, 500)
       
     })
-    // use id to hit database 
 
   }
 
