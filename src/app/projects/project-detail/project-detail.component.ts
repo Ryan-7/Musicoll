@@ -81,6 +81,8 @@ export class ProjectDetailComponent implements OnInit {
       this.loading = true;
       let projectId = params.get('id');
       
+      // everytime the params change, we will query the API for that project id's data.
+
       this.httpService.getProjectById(projectId).subscribe((res) => {
         this.project = res;
         // In real world, set loading back to false here. 
