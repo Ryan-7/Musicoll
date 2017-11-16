@@ -12,7 +12,7 @@
         <span class="option" (click)="deleteProject()">Delete Project</span>
     </div>
 </div>
-
+ 
 
  
 <div class="spinner-container">
@@ -30,8 +30,13 @@
             <div class="md-form">
                 <input type="text" id="form1" class="form-control" #title value="{{ project.name }}">
             </div>
-            <button class="btn btn-sm btn-primary" (click)="save('title')">Save</button>
-            <button class="btn btn-sm btn-danger" (click)="cancel('title')">Cancel</button>
+            <div *ngIf="!savingTitle">
+                <button class="btn btn-sm btn-primary" (click)="save('title')">Save</button>
+                <button class="btn btn-sm btn-danger" (click)="cancel('title')">Cancel</button>
+            </div>
+            <div *ngIf="savingTitle">
+                <h3 class="animated infinite flash text-center">Saving</h3>
+            </div>
         </div>
         <hr>
 
@@ -39,8 +44,8 @@
 
         <p>Tracks | <span (click)="edit()" class="edit">Edit</span></p>
         <audio controls>
-                <source src="horse.ogg" type="audio/ogg">
-                <source src="horse.mp3" type="audio/mpeg">
+                <source src="" type="audio/ogg">
+                <source src="" type="audio/mpeg">
               Your browser does not support the audio element.
         </audio><br><br>
         <button class="btn btn-sm btn-info">Upload Audio</button>
@@ -48,14 +53,14 @@
 
 <br><br>
 
-        <div class="list-group list-small">
+        <div class="list-group list-small" *ngFor="let audio of project.audio">
                 <div class="list-group-item list-group-item-action flex-column align-items-start">
                   <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">Guitar Rhythm</h5>
+                    <h5 class="mb-1">{{ audio.title }}</h5>
                     <small>3 days ago</small>
                   </div>
-                  <p class="mb-1">Acoustic rhythm without any lead or melody added.</p>
-                  <button class="btn btn-sm btn-warning center-block">Play</button>
+                  <p class="mb-1">{{ audio.description }}</p>
+                  <button class="btn btn-sm btn-warning center-block" (click)="play(audio.file)">Play</button>
                   <button class="btn btn-sm btn-secondary center-block">Download</button>
                   <button class="btn btn-sm btn-danger center-block">Delete</button>
                 </div>
