@@ -17,6 +17,7 @@ export class ProjectDetailComponent implements OnInit {
   } 
 
   project; // need to add model 
+  projectId; // need to add model 
   loading: boolean = true;
   
   editingTitle: boolean = false;
@@ -73,20 +74,23 @@ export class ProjectDetailComponent implements OnInit {
 
   update(dataToSave) {
     console.log(dataToSave);
-    // talk to http service 
+    // talk to http service using the id
   }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: Params) => {
       this.loading = true;
-      let projectId = params.get('id');
+      this.projectId = params.get('id');
       
       // everytime the params change, we will query the API for that project id's data.
 
-      this.httpService.getProjectById(projectId).subscribe((res) => {
+      this.httpService.getProjectById(this.projectId).subscribe((res) => {
         this.project = res;
         // In real world, set loading back to false here. 
       })
+
+      // if error trying to get id, show a "project not found"
+      // could re-direct to error page... ?
 
 
       setTimeout(() => {

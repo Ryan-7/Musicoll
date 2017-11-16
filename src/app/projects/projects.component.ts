@@ -1,5 +1,5 @@
 import { HttpService } from './../services/http.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 
@@ -35,4 +35,5 @@ export class ProjectsComponent implements OnInit {
   ngOnInit() {
     this.getProjectList();
   }
+
 }

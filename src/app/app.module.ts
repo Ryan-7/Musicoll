@@ -18,6 +18,7 @@ import { ShortenPipe } from './shared/shorten.pipe';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignupComponent } from './signup/signup.component';
 import { FooterComponent } from './footer/footer.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { FooterComponent } from './footer/footer.component';
     SignInComponent,
     SignupComponent,
     FooterComponent,
-    Autosize
+    Autosize,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

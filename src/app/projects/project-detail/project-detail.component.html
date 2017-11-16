@@ -1,15 +1,4 @@
-<div class="toolbar animated slideInRight">
-    <div class="inline-block">
-        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Export PDF
-    </div>
-    <div class="inline-block">
-        <i class="fa fa-address-book-o" aria-hidden="true"></i> Invite
-    </div>
-    <div class="inline-block">
-        <i class="fa fa-trash" aria-hidden="true"></i> Delete Project
-    </div>
-</div>
-
+<app-toolbar [projectId]="projectId"></app-toolbar>
  
 <div class="spinner-container">
         <i class="fa fa-spinner fa-spin spinner text-center" *ngIf="loading" aria-hidden="true"></i>
