@@ -1,6 +1,7 @@
+import { ProjectsComponent } from './../projects.component';
 import { HttpService } from './../../services/http.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Component({
   selector: 'app-project-detail',
@@ -13,7 +14,7 @@ export class ProjectDetailComponent implements OnInit {
   @ViewChild('lyrics') lyrics;
   @ViewChild('notes') notes;
 
-  constructor(private activatedRoute: ActivatedRoute, private httpService: HttpService) { 
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private httpService: HttpService, private projectsComponent: ProjectsComponent) { 
   } 
 
   project; // need to add model 
@@ -24,6 +25,20 @@ export class ProjectDetailComponent implements OnInit {
   editingLyrics: boolean = false;
   editingNotes: boolean = false;
 
+  deleteProject() {
+    this.loading = true;
+    this.httpService.deleteProject(this.projectId).subscribe((res) => {
+
+
+      setTimeout(() => { // only used to simulate http request time 
+        this.projectsComponent.getProjectList(); 
+        this.loading = false;
+        this.router.navigate(['projects']);
+      }, 500)
+
+      
+    })
+  }
 
   edit(inputArea) {
     console.log(inputArea)
