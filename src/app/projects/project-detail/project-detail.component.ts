@@ -29,14 +29,12 @@ export class ProjectDetailComponent implements OnInit {
     this.loading = true;
     this.httpService.deleteProject(this.projectId).subscribe((res) => {
 
-
       setTimeout(() => { // only used to simulate http request time 
         this.projectsComponent.getProjectList(); 
         this.loading = false;
         this.router.navigate(['projects']);
       }, 500)
 
-      
     })
   }
 
@@ -108,7 +106,7 @@ export class ProjectDetailComponent implements OnInit {
       // could re-direct to error page... ?
 
 
-      setTimeout(() => {
+      setTimeout(() => { // Simulate HTTP request time 
         this.loading = false;
       }, 500)
       
