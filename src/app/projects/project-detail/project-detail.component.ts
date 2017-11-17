@@ -29,6 +29,8 @@ export class ProjectDetailComponent implements OnInit {
   savingTitle: boolean = false;
   savingLyrics: boolean = false;
 
+  deletingProject: boolean = true;
+
   deleteProject() {
     this.loading = true;
     this.httpService.deleteProject(this.projectId).subscribe((res) => {
