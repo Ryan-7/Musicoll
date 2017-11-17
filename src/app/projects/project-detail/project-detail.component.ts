@@ -27,6 +27,7 @@ export class ProjectDetailComponent implements OnInit {
   editingNotes: boolean = false;
 
   savingTitle: boolean = false;
+  savingLyrics: boolean = false;
 
   deleteProject() {
     this.loading = true;
@@ -50,7 +51,7 @@ export class ProjectDetailComponent implements OnInit {
     switch(inputArea) {
       case 'title':
           this.editingTitle = true;
-          setTimeout(() => { this.title.nativeElement.focus(); }); // setTimouet to allow time for ViewChild to bind to element.
+          setTimeout(() => { this.title.nativeElement.focus(); }); // setTimeout to allow time for ViewChild to bind to element.
           break;
       case 'lyrics':
           this.editingLyrics = true;
@@ -71,7 +72,7 @@ export class ProjectDetailComponent implements OnInit {
           this.project.name = this.title.nativeElement.value;
           break;
       case 'lyrics':
-          this.editingLyrics = false;
+          this.savingLyrics = true;
           this.project.lyrics = this.lyrics.nativeElement.value;
           break;
       case 'notes':
@@ -103,6 +104,9 @@ export class ProjectDetailComponent implements OnInit {
         this.project = res;
         this.editingTitle = false;
         this.savingTitle = false;
+
+        this.editingLyrics = false;
+        this.savingLyrics = false;
         this.projectsComponent.getProjectList();
       }, 1000)
 

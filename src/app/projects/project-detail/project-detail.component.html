@@ -76,8 +76,13 @@
             <div class="md-form">
                 <textarea type="text" class="md-textarea lyrics lyrics-edit" #lyrics autosize>{{ project.lyrics }}</textarea>
             </div>
-            <button class="btn btn-sm btn-primary" (click)="save('lyrics')">Save</button>
-            <button class="btn btn-sm btn-danger" (click)="cancel('lyrics')">Cancel</button>
+            <div *ngIf="!savingLyrics">
+                <button class="btn btn-sm btn-primary" (click)="save('lyrics')">Save</button>
+                <button class="btn btn-sm btn-danger" (click)="cancel('lyrics')">Cancel</button>
+            </div>
+            <div *ngIf="savingLyrics">
+                    <h3 class="animated infinite flash text-center">Saving</h3>
+                </div>
         </div>
 
         <div *ngIf="!editingLyrics" class="lyrics">
