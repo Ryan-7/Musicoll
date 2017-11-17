@@ -80,6 +80,7 @@ input {
     font-size: .9rem;
     color: #747373;
     font-weight: 400;
+    white-space: pre;
 }
 
 .notes-edit {
@@ -89,6 +90,10 @@ input {
      padding: 0 0 10px 0;
      font-weight: 400; 
      margin: 0 auto;
+ }
+
+ .md-form {
+     margin-bottom: 0;
  }
 
  .card-header, .card-body {

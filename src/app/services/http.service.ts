@@ -27,4 +27,8 @@ export class HttpService {
     return this.httpClient.delete('http://localhost:3000/api/projects/' + projectId);
   }
 
+  updateProject(projectId, dataToSave) {
+    return this.httpClient.patch('http://localhost:3000/api/projects/' + projectId, dataToSave);
+  }
+
 }

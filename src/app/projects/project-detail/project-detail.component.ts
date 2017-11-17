@@ -18,12 +18,16 @@ export class ProjectDetailComponent implements OnInit {
   } 
 
   project; // need to add model 
+  projectAudio;
   projectId; // need to add model 
   loading: boolean = true;
   
   editingTitle: boolean = false;
   editingLyrics: boolean = false;
   editingNotes: boolean = false;
+
+  savingTitle: boolean = false;
+  savingLyrics: boolean = false;
 
   deleteProject() {
     this.loading = true;
@@ -34,16 +38,20 @@ export class ProjectDetailComponent implements OnInit {
         this.loading = false;
         this.router.navigate(['projects']);
       }, 500)
-
     })
   }
+
+  play(file) {
+    console.log(file);
+  }
+
 
   edit(inputArea) {
     console.log(inputArea)
     switch(inputArea) {
       case 'title':
           this.editingTitle = true;
-          setTimeout(() => { this.title.nativeElement.focus(); }); // setTimouet to allow time for ViewChild to bind to element.
+          setTimeout(() => { this.title.nativeElement.focus(); }); // setTimeout to allow time for ViewChild to bind to element.
           break;
       case 'lyrics':
           this.editingLyrics = true;
@@ -60,20 +68,24 @@ export class ProjectDetailComponent implements OnInit {
     let dataToSave;
     switch(inputArea) {
       case 'title':
-          this.editingTitle = false;
-          dataToSave = this.title.nativeElement.value;
+          this.savingTitle = true;
+          this.project.name = this.title.nativeElement.value;
           break;
       case 'lyrics':
-          this.editingLyrics = false;
-          dataToSave = this.lyrics.nativeElement.value;
+          this.savingLyrics = true;
+          this.project.lyrics = this.lyrics.nativeElement.value;
           break;
       case 'notes':
           this.editingNotes = false;
-          dataToSave = this.notes.nativeElement.value;
+          this.project.notes = this.notes.nativeElement.value;
           break;
     }
-    this.update(dataToSave);
+
+    this.update(this.project);
+
+  //  this.update(dataToSave);
   }
+
 
   cancel(inputArea) {
     if (inputArea === 'title') {
@@ -86,8 +98,19 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   update(dataToSave) {
-    console.log(dataToSave);
-    // talk to http service using the id
+    this.httpService.updateProject(this.projectId, dataToSave).subscribe((res) => {
+      
+      setTimeout(() => {
+        this.project = res;
+        this.editingTitle = false;
+        this.savingTitle = false;
+
+        this.editingLyrics = false;
+        this.savingLyrics = false;
+        this.projectsComponent.getProjectList();
+      }, 1000)
+
+    })
   }
 
   ngOnInit() {
@@ -99,6 +122,8 @@ export class ProjectDetailComponent implements OnInit {
 
       this.httpService.getProjectById(this.projectId).subscribe((res) => {
         this.project = res;
+        this.projectAudio = res['audio'];
+        console.log(this.project);
         // In real world, set loading back to false here. 
       })
 
