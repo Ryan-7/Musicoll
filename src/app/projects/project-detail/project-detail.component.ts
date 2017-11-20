@@ -28,8 +28,18 @@ export class ProjectDetailComponent implements OnInit {
 
   savingTitle: boolean = false;
   savingLyrics: boolean = false;
+  savingNotes: boolean = false;
 
-  deletingProject: boolean = true;
+  deletingProject: boolean = false;
+
+  deleteModal() {
+    this.deletingProject = true;
+    window.scrollTo(0, 0);
+  }
+
+  cancelDelete() {
+    this.deletingProject = false;
+  }
 
   deleteProject() {
     this.loading = true;
@@ -39,6 +49,7 @@ export class ProjectDetailComponent implements OnInit {
         this.projectsComponent.getProjectList(); 
         this.loading = false;
         this.router.navigate(['projects']);
+        this.deletingProject = false;
       }, 500)
     })
   }
@@ -78,14 +89,12 @@ export class ProjectDetailComponent implements OnInit {
           this.project.lyrics = this.lyrics.nativeElement.value;
           break;
       case 'notes':
-          this.editingNotes = false;
+          this.savingNotes = true;
           this.project.notes = this.notes.nativeElement.value;
           break;
     }
 
     this.update(this.project);
-
-  //  this.update(dataToSave);
   }
 
 
@@ -109,6 +118,11 @@ export class ProjectDetailComponent implements OnInit {
 
         this.editingLyrics = false;
         this.savingLyrics = false;
+
+
+        this.editingNotes = false;
+        this.savingNotes = false;
+        
         this.projectsComponent.getProjectList();
       }, 1000)
 
