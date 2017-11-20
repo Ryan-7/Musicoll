@@ -9,7 +9,7 @@
     </div>
     <div class="inline-block">
         <i class="fa fa-trash" aria-hidden="true"></i>
-        <span class="option" (click)="deleteProject()">Delete Project</span>
+        <span class="option" (click)="deleteModal()">Delete Project</span>
     </div>
 </div>
  
@@ -21,8 +21,24 @@
 
 
 
+
+                
+
+<div class="card animated slideInDown" *ngIf="deletingProject">
+    <div class="card-body text-center">
+        <h4 class="card-title">Are you sure you want to delete '{{ project.name }}' ?</h4>
+        <p class="card-text text-center">You will not be able to recover any audio files or information related to this particular project.</p>
+        <a class="btn btn-info" (click)="cancelDelete()">Cancel</a>
+        <a class="btn btn-danger" (click)="deleteProject()">Delete</a>
+    </div>
+</div>
+
+
 <div *ngIf="!loading">
     <div class="jumbotron">
+
+
+
 
         <!-- Title -->
         <p>Title | <span (click)="edit('title')" class="edit">Edit</span></p>
@@ -84,7 +100,7 @@
             </div>
             <div *ngIf="savingLyrics">
                     <h3 class="animated infinite flash text-center">Saving</h3>
-                </div>
+            </div>
         </div>
 
         <div *ngIf="!editingLyrics" class="lyrics">
@@ -98,8 +114,13 @@
             <div class="md-form">
                 <textarea type="text" class="md-textarea notes notes-edit" #notes autosize>{{ project.notes }}</textarea>
             </div>
-            <button class="btn btn-sm btn-primary" (click)="save('notes')">Save</button>
-            <button class="btn btn-sm btn-danger" (click)="cancel('notes')">Cancel</button>
+            <div *ngIf="!savingNotes">
+                <button class="btn btn-sm btn-primary" (click)="save('notes')">Save</button>
+                <button class="btn btn-sm btn-danger" (click)="cancel('notes')">Cancel</button>
+            </div>
+            <div *ngIf="savingNotes">
+                <h3 class="animated infinite flash text-center">Saving</h3>
+            </div>
         </div>
         <div *ngIf="!editingNotes" class="notes">
                 {{ project.notes }}
