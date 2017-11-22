@@ -59,7 +59,6 @@ export class ProjectLandingComponent implements OnInit {
  
 
   ngOnInit() {
-  
 
   }
 
