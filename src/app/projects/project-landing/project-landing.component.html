@@ -1,23 +1,16 @@
+<h1>Recorder.js simple WAV export example</h1>
 
-<div class="jumbotron animated slideInDown">
-  <h1 class="h1-responsive">Hello, Ryan!</h1>
-  <p class="lead">Please select a project from the list or start a new one.</p>
-  <hr class="my-2">
-  <p>Invite friends to collaborate on projects with you where they can help write, upload audio files and leave comments for discussion.
-  </p>
-  <a class="btn btn-danger btn-lg" role="button">Send Invite</a>
-</div>
+  <p>Make sure you are using a recent version of Google Chrome.</p>
+  <p>Also before you enable microphone input either plug in headphones or turn the volume down if you want to avoid ear splitting feedback!</p>
+<!-- 
+  <button onclick="startRecording(this);">record</button>
+  <button onclick="stopRecording(this);" disabled>stop</button> -->
 
-<hr>
-<h2>Recording Area Test</h2>
-<hr>
-
-<div class="col-xs-12">
-  <button md-raised-button color="primary" (click)="startRecording()"> Record </button>
-  <button md-raised-button color="primary"(click) ="stopRecording()"> Stop</button>
-  <button md-raised-button color="primary" (click)="saveRecording()"> Download</button>
-</div>
-
-<audio #audio controls>
-Your browser does not support the audio element.
-</audio>
+  <button class="btn btn-primary" id = "record" (click)="start(this);" [ngClass]='{disabled: isOn}'>record</button>
+  <button class="btn btn-primary" id = "stop" (click)="stop(this);" [ngClass]='{disabled: isOff}'>stop</button>
+  
+  <h2>Recordings</h2>
+  <ul id="recordingslist"></ul>
+  
+  <h2>Log</h2>
+  <pre id="log"></pre>
