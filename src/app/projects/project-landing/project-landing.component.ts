@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as RecordRTC from 'recordrtc';
 
+declare const navigator: any;
+declare const MediaRecorder: any;
+
+
 @Component({
   selector: 'app-project-landing',
   templateUrl: './project-landing.component.html',
@@ -8,55 +12,44 @@ import * as RecordRTC from 'recordrtc';
 })
 export class ProjectLandingComponent implements OnInit {
 
+  public isRecording: boolean = false;
+  private chunks: any = [];
+  private mediaRecorder: any;
 
-  private stream: MediaStream;
-  private recordRTC: any;
-  private recordedFile: any;
+  constructor() {
+    const onSuccess = stream => {
+      this.mediaRecorder = new MediaRecorder(stream);
+      this.mediaRecorder.onstop = e => {
+        const audio = new Audio();
+        const blob = new Blob(this.chunks, { 'type': 'audio/ogg; codecs=opus' });
+        this.chunks.length = 0;
+        audio.src = window.URL.createObjectURL(blob);
+        audio.load();
+        audio.play();
+      };
 
-  @ViewChild('audio') audio;
-
-  constructor() { }
-  
-  startRecording() {
-
-    // set the media constraints for audio only.
-    let mediaConstraints = {
-      video: false,
-      audio: true
+      this.mediaRecorder.ondataavailable = e => this.chunks.push(e.data);
     };
 
-    // Navigator is an object that refers to the browser, we can access media devices like the Mic.
-    // Will return a stream which we can use. 
-    
-    navigator.mediaDevices.getUserMedia(mediaConstraints).then((stream) => {
-      this.successConnecting(stream);
-    }).catch((err) => {
-      console.log(err);
-      console.log('Cannot access Microphone')
-    })
+    navigator.getUserMedia = (navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia ||
+      navigator.msGetUserMedia);
 
-}
-
-  successConnecting(stream: MediaStream) {
-    // Use the recordRTC library. 
-    this.recordRTC = RecordRTC(stream, { type: 'audio', mimeType: 'mp3'});
-    this.recordRTC.startRecording();
+    navigator.getUserMedia({ audio: true }, onSuccess, e => console.log(e));
   }
 
-  stopRecording() {
-    this.recordRTC.stopRecording((audioURL) => {
-      this.audio.nativeElement.src = audioURL; // Set the audio element src for playback. 
-      this.recordedFile = this.recordRTC.getBlob(); // Save audio file to variable 
-      // save audio file to S3 bucket 
-   //   console.log(recordedFile)
-    });
+  public record() {
+    this.isRecording = true;
+    this.mediaRecorder.start();
+    console.log(this.chunks)
   }
 
-  saveRecording() {
-    this.recordRTC.save('audio.webm');
+  public stop() {
+    this.isRecording = false;
+    this.mediaRecorder.stop();
+    console.log(this.chunks)
   }
-
- 
 
   ngOnInit() {
   
