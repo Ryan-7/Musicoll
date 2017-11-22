@@ -37,7 +37,7 @@ function __log(e, data) {
     recorder && recorder.exportWAV(function(blob) {
       var url = URL.createObjectURL(blob);
       var li = document.createElement('li');
-      var au = document.createElement('audio');
+      var au = document.createElement('audio'); // replace this code with reference to the audio player on screen.
       var hf = document.createElement('a');
       
       au.controls = true;
