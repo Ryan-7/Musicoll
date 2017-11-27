@@ -5,7 +5,7 @@
     </div>
     <div class="inline-block">
         <i class="fa fa-address-book-o" aria-hidden="true"></i>
-        <span class="option">Invite</span>
+        <span class="option" routerLink="/projects">Invite</span>
     </div>
     <div class="inline-block">
         <i class="fa fa-trash" aria-hidden="true"></i>
@@ -18,8 +18,6 @@
 <div class="spinner-container">
         <i class="fa fa-spinner fa-spin spinner text-center" *ngIf="loading" aria-hidden="true"></i>
 </div>
-
-
 
 
                 
@@ -69,7 +67,7 @@
 
         <!-- Tracks -->
 
-        <p>Tracks | <span (click)="edit()" class="edit">Edit</span></p>
+        <p>Tracks</p>
         <audio controls>
                 <source src="" type="audio/ogg">
                 <source src="" type="audio/mpeg">
@@ -97,7 +95,7 @@
   
         <hr>
         <!-- Lyrics -->
-        <p>Lyrics | <span (click)="edit('lyrics')" class="edit">Expand</span> | <span (click)="edit('lyrics')" class="edit">Edit</span></p>
+        <p>Lyrics | <span (click)="edit('lyrics')" class="edit">Edit</span></p>
         
         <div *ngIf="editingLyrics">
             <div class="md-form">
