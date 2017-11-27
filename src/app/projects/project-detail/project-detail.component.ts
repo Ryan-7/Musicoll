@@ -3,6 +3,8 @@ import { HttpService } from './../../services/http.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
+declare var jsPDF; // For use of jsPDF Library. 
+
 @Component({
   selector: 'app-project-detail',
   templateUrl: './project-detail.component.html',
@@ -31,6 +33,34 @@ export class ProjectDetailComponent implements OnInit {
   savingNotes: boolean = false;
 
   deletingProject: boolean = false;
+  toPdf: boolean = false;
+
+  pdfModal() {
+    this.toPdf = true;
+    window.scrollTo(0, 0);
+  }
+
+  cancelPdf() {
+    this.toPdf = false;
+  }
+
+  createPdf() {
+    this.loading = true;
+
+    let textArray: String[] = this.project.lyrics.split('\n');
+    var doc = jsPDF();
+    doc.writeText(0, 25, this.project.name, { align: 'center' });
+
+    for (var i = 0; i < textArray.length; i++) {
+      let text = textArray[i];
+      doc.writeText(0, (30 + (i * 5)), text, { align: 'center' });
+    }
+    
+    doc.save(this.project._id + '.pdf');
+
+    this.loading = false;
+    this.toPdf = false;
+  }
 
   deleteModal() {
     this.deletingProject = true;
@@ -53,6 +83,8 @@ export class ProjectDetailComponent implements OnInit {
       }, 500)
     })
   }
+
+
 
   play(file) {
     console.log(file);
