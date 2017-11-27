@@ -49,15 +49,14 @@ export class ProjectDetailComponent implements OnInit {
 
     let textArray: String[] = this.project.lyrics.split('\n');
     var doc = jsPDF();
+    doc.writeText(0, 25, this.project.name, { align: 'center' });
 
     for (var i = 0; i < textArray.length; i++) {
       let text = textArray[i];
-      doc.writeText(0, (40 + (i * 10)), text, { align: 'center' });
+      doc.writeText(0, (30 + (i * 5)), text, { align: 'center' });
     }
     
     doc.save(this.project._id + '.pdf');
-
- 
 
     this.loading = false;
     this.toPdf = false;
