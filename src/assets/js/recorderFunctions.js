@@ -23,7 +23,7 @@ var audioInput = null,
 var rafID = null;
 var analyserContext = null;
 var canvasWidth, canvasHeight;
-var recIndex = 0;
+var recIndex = 0; 
 
 /* TODO:
 
@@ -51,7 +51,7 @@ function gotBuffers( buffers ) {
 
 function doneEncoding( blob ) {
     console.log('done encoding')
-    Recorder.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
+    Recorder.forceDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
     recIndex++;
     console.log('done encoding executed')
 }
@@ -176,6 +176,9 @@ function gotStream(stream) {
     zeroGain.connect( audioContext.destination );
     updateAnalysers();
 }
+
+// This runs first, which talks to the browser to use the mic
+// Then we call "gotStream()" if successful. 
 
 function initAudio() {
         if (!navigator.getUserMedia)
