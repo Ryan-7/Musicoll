@@ -16,33 +16,23 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 var audioContext = new AudioContext();
-var audioInput = null,
-    realAudioInput = null,
-    inputPoint = null,
-    audioRecorder = null;
-var rafID = null;
-var analyserContext = null;
-var canvasWidth, canvasHeight;
+var realAudioInput = null;
+var audioRecorder = null;
 var recIndex = 0; 
 
 
 function saveAudio() {
     audioRecorder.exportWAV( doneEncoding );
-    console.log('save audio')
 }
 
 
 function doneEncoding( blob ) {
-    console.log('done encoding')
     Recorder.forceDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
     recIndex++;
-    console.log('done encoding executed')
 }
 
 
 function startRecording() {
-    console.log(audioRecorder)
-    console.log('start recording works')
     if (!audioRecorder)
         return;
     audioRecorder.clear();
@@ -50,10 +40,8 @@ function startRecording() {
 }
 
 function stopRecording() {
-    console.log('stop recording works')
     audioRecorder.stop();
 }
-
 
 
 function gotStream(stream) {
@@ -76,7 +64,7 @@ function initAudio() {
         {
             "audio": {
                 "mandatory": {
-                    "googEchoCancellation": "true", // audio processing 
+                    "googEchoCancellation": "false", // audio processing 
                     "googAutoGainControl": "false",
                     "googNoiseSuppression": "false",
                     "googHighpassFilter": "false",
