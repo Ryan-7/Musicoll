@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 declare var Recorder; 
 
@@ -10,15 +10,15 @@ declare var Recorder;
 })
 export class RecorderComponent implements OnInit {
 
+  @ViewChild('audio') audio;
+
   private audioContext: AudioContext;
-  private stream;
+  private stream: MediaStream;
 
   realAudioInput = null;
   audioRecorder = null;
-  recIndex = 0; 
   
   
-
   constructor() { }
 
   startRecording() {
@@ -37,11 +37,12 @@ export class RecorderComponent implements OnInit {
     this.audioRecorder.exportWAV(this.doneEncoding);
   }
 
-  doneEncoding( blob ) {
+  doneEncoding(blob) {
    // Recorder.forceDownload( blob, "myRecording.wav" );
    // this.recIndex++;
     var url = (window.URL).createObjectURL(blob);
-    window.open(url)
+    // window.open(url)
+     this.audio.nativeElement.src = url;
   }
 
   streamSuccess(stream: MediaStream) {
@@ -53,31 +54,20 @@ export class RecorderComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(!navigator.getUserMedia)
+    console.log(this.audio);
+
+    // console.log(!navigator.getUserMedia)
     // if (!navigator.getUserMedia)
     //   navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     
     this.audioContext = new AudioContext();
     
-    // let mediaConstraints = {
-    //   audio: true,
-    //   mandatory: {
-    //     "echoCancellation": "false",
-    //     "googEchoCancellation": "false",
-    //     "googAutoGainControl": "false",
-    //     "googNoiseSuppression": "false",
-    //     "googHighpassFilter": "false",
-    //     "googTypingNoiseDetection": "false"
-    //   },
-    //   optional: []
-    // }
-
     let mediaConstraints = {
       audio: {
         echoCancellation: false
       } as any
     }
-    console.log(navigator.mediaDevices.getSupportedConstraints());
+    console.log(navigator.mediaDevices.getSupportedConstraints()); // Current constraint options 
     navigator.mediaDevices.getUserMedia(mediaConstraints).then((stream) => {
       this.streamSuccess(stream);
     }).catch((e) => {
