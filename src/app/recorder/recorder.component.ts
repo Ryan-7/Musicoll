@@ -56,9 +56,11 @@ export class RecorderComponent implements OnInit {
     //   navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     
     this.audioContext = new AudioContext();
+    
     let mediaConstraints = {
       audio: true,
       mandatory: {
+        "echoCancellation": "false",
         "googEchoCancellation": "false",
         "googAutoGainControl": "false",
         "googNoiseSuppression": "false",
@@ -67,11 +69,12 @@ export class RecorderComponent implements OnInit {
       },
       optional: []
     }
-
-    navigator.getUserMedia(mediaConstraints, this.streamSuccess.bind(this), function(e) {
-          alert('Error getting audio');
-          console.log(e);
-      });
+    console.log(navigator.mediaDevices.getSupportedConstraints());
+    navigator.mediaDevices.getUserMedia(mediaConstraints).then((stream) => {
+      this.streamSuccess(stream);
+    }).catch((e) => {
+      console.log(e);
+    })
   }
  
 }
