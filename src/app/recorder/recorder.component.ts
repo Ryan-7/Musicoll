@@ -12,7 +12,7 @@ export class RecorderComponent implements OnInit {
 
   private audioContext: AudioContext;
   private stream;
-  
+
   realAudioInput = null;
   audioRecorder = null;
   recIndex = 0; 
@@ -21,27 +21,40 @@ export class RecorderComponent implements OnInit {
 
   constructor() { }
 
-startRecording() {
-    console.log(this.audioRecorder)
+  startRecording() {
+    console.log('start recording');
     this.audioRecorder.clear();
     this.audioRecorder.record();
-}
+  }
 
   stopRecording() {
-    console.log('Stop recording')
+    console.log('Stop recording');
+    this.audioRecorder.stop();
   }
 
   saveRecording(){
-    console.log('download')
+    console.log('download');
+    this.audioRecorder.exportWAV(this.doneEncoding);
   }
 
-  gotStream(stream: MediaStream) {
+  doneEncoding( blob ) {
+   // Recorder.forceDownload( blob, "myRecording.wav" );
+   // this.recIndex++;
+    var url = (window.URL).createObjectURL(blob);
+    window.open(url)
+  }
 
-    this.realAudioInput = this.audioContext.createMediaStreamSource(this.stream);
+  streamSuccess(stream: MediaStream) {
+    this.realAudioInput = this.audioContext.createMediaStreamSource(stream);
     this.audioRecorder = new Recorder( this.realAudioInput );
-}
+  }
+
+
 
   ngOnInit() {
+    // if (!navigator.getUserMedia)
+    //   navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    
     this.audioContext = new AudioContext();
     let mediaConstraints = {
       audio: true,
@@ -55,7 +68,7 @@ startRecording() {
       optional: []
     }
 
-    navigator.getUserMedia(mediaConstraints, this.gotStream, function(e) {
+    navigator.getUserMedia(mediaConstraints, this.streamSuccess.bind(this), function(e) {
           alert('Error getting audio');
           console.log(e);
       });
