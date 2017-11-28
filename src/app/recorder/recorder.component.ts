@@ -10,7 +10,9 @@ declare var Recorder;
 })
 export class RecorderComponent implements OnInit {
 
-  audioContext = new AudioContext();
+  private audioContext: AudioContext;
+  private stream;
+  
   realAudioInput = null;
   audioRecorder = null;
   recIndex = 0; 
@@ -19,9 +21,11 @@ export class RecorderComponent implements OnInit {
 
   constructor() { }
 
-  startRecording() {
-    console.log('Start recording')
-  }
+startRecording() {
+    console.log(this.audioRecorder)
+    this.audioRecorder.clear();
+    this.audioRecorder.record();
+}
 
   stopRecording() {
     console.log('Stop recording')
@@ -31,13 +35,14 @@ export class RecorderComponent implements OnInit {
     console.log('download')
   }
 
-  gotStream(stream) {
-    this.realAudioInput = this.audioContext.createMediaStreamSource(stream);
+  gotStream(stream: MediaStream) {
+
+    this.realAudioInput = this.audioContext.createMediaStreamSource(this.stream);
     this.audioRecorder = new Recorder( this.realAudioInput );
 }
 
-  initAudio() {
-
+  ngOnInit() {
+    this.audioContext = new AudioContext();
     let mediaConstraints = {
       audio: true,
       mandatory: {
@@ -50,12 +55,10 @@ export class RecorderComponent implements OnInit {
       optional: []
     }
 
-navigator.getUserMedia(mediaConstraints, this.gotStream, function(e) {
-        alert('Error getting audio');
-        console.log(e);
-    });
+    navigator.getUserMedia(mediaConstraints, this.gotStream, function(e) {
+          alert('Error getting audio');
+          console.log(e);
+      });
   }
-
-  ngOnInit() {}
  
 }
