@@ -34,15 +34,14 @@ export class RecorderComponent implements OnInit {
 
   saveRecording(){
     console.log('download');
-    this.audioRecorder.exportWAV(this.doneEncoding);
+    this.audioRecorder.exportWAV(this.doneEncoding.bind(this)); 
+    // 'this' in its current context refers to this object, 'RecorderComponent' 
+    // we bind it so when using 'this' within doneEncoding(), it will refer to RecorderComponent
   }
 
   doneEncoding(blob) {
-   // Recorder.forceDownload( blob, "myRecording.wav" );
-   // this.recIndex++;
     var url = (window.URL).createObjectURL(blob);
-    // window.open(url)
-     this.audio.nativeElement.src = url;
+    this.audio.nativeElement.src = url;
   }
 
   streamSuccess(stream: MediaStream) {
@@ -54,7 +53,7 @@ export class RecorderComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.audio);
+  //  console.log(this.audio);
 
     // console.log(!navigator.getUserMedia)
     // if (!navigator.getUserMedia)
