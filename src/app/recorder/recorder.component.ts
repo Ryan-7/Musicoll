@@ -52,22 +52,30 @@ export class RecorderComponent implements OnInit {
 
 
   ngOnInit() {
+
+    console.log(!navigator.getUserMedia)
     // if (!navigator.getUserMedia)
     //   navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
     
     this.audioContext = new AudioContext();
     
+    // let mediaConstraints = {
+    //   audio: true,
+    //   mandatory: {
+    //     "echoCancellation": "false",
+    //     "googEchoCancellation": "false",
+    //     "googAutoGainControl": "false",
+    //     "googNoiseSuppression": "false",
+    //     "googHighpassFilter": "false",
+    //     "googTypingNoiseDetection": "false"
+    //   },
+    //   optional: []
+    // }
+
     let mediaConstraints = {
-      audio: true,
-      mandatory: {
-        "echoCancellation": "false",
-        "googEchoCancellation": "false",
-        "googAutoGainControl": "false",
-        "googNoiseSuppression": "false",
-        "googHighpassFilter": "false",
-        "googTypingNoiseDetection": "false"
-      },
-      optional: []
+      audio: {
+        echoCancellation: false
+      } as any
     }
     console.log(navigator.mediaDevices.getSupportedConstraints());
     navigator.mediaDevices.getUserMedia(mediaConstraints).then((stream) => {
