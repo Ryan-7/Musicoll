@@ -141,40 +141,40 @@ function updateAnalysers(time) {
     rafID = window.requestAnimationFrame( updateAnalysers );
 }
 
-function toggleMono() {
-    if (audioInput != realAudioInput) {
-        audioInput.disconnect();
-        realAudioInput.disconnect();
-        audioInput = realAudioInput;
-    } else {
-        realAudioInput.disconnect();
-        audioInput = convertToMono( realAudioInput );
-    }
+// function toggleMono() {
+//     if (audioInput != realAudioInput) {
+//         audioInput.disconnect();
+//         realAudioInput.disconnect();
+//         audioInput = realAudioInput;
+//     } else {
+//         realAudioInput.disconnect();
+//         audioInput = convertToMono( realAudioInput );
+//     }
 
-    audioInput.connect(inputPoint);
-}
+//     audioInput.connect(inputPoint);
+// }
 
 function gotStream(stream) {
-    inputPoint = audioContext.createGain();
+   // inputPoint = audioContext.createGain();
 
     // Create an AudioNode from the stream.
     realAudioInput = audioContext.createMediaStreamSource(stream);
-    audioInput = realAudioInput;
-    audioInput.connect(inputPoint);
+    // audioInput = realAudioInput;
+    // audioInput.connect(inputPoint);
 
 //    audioInput = convertToMono( input );
 
-    analyserNode = audioContext.createAnalyser();
-    analyserNode.fftSize = 2048;
-    inputPoint.connect( analyserNode );
+    // analyserNode = audioContext.createAnalyser();
+    // analyserNode.fftSize = 2048;
+    // inputPoint.connect( analyserNode );
 
-    audioRecorder = new Recorder( inputPoint );
+    audioRecorder = new Recorder( realAudioInput );
 
-    zeroGain = audioContext.createGain();
-    zeroGain.gain.value = 0.0;
-    inputPoint.connect( zeroGain );
-    zeroGain.connect( audioContext.destination );
-    updateAnalysers();
+    // zeroGain = audioContext.createGain();
+    // zeroGain.gain.value = 0.0;
+    // inputPoint.connect( zeroGain );
+    // zeroGain.connect( audioContext.destination );
+    // updateAnalysers();
 }
 
 // This runs first, which talks to the browser to use the mic
