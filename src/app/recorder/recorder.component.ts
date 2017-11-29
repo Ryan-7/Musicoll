@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 
 declare var Recorder; 
 
@@ -74,6 +74,10 @@ export class RecorderComponent implements OnInit {
     }).catch((e) => {
       console.log(e);
     })
+  }
+
+  ngOnDestroy() {
+    this.audioContext.close();
   }
  
 }

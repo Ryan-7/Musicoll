@@ -65,19 +65,21 @@
         </div>
         <hr>
 
-        <!-- Tracks -->
+        <!-- Audio-->
 
-        <p>Tracks</p>
-        <audio controls>
+        <p>Audio | <span class="edit"><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></p>
+        <!-- <audio controls>
                 <source src="" type="audio/ogg">
                 <source src="" type="audio/mpeg">
               Your browser does not support the audio element.
-        </audio><br><br>
-        <button class="btn btn-sm btn-info">Upload Audio</button>
-        <button class="btn btn-sm btn-success">Record Audio</button>
+        </audio><br><br> -->
 
-<br><br>
+       
+        <app-recorder></app-recorder>
 
+
+        <br><br><br>
+      
         <div class="list-group list-small" *ngFor="let audio of project.audio">
                 <div class="list-group-item list-group-item-action flex-column align-items-start">
                   <div class="d-flex w-100 justify-content-between">
@@ -85,12 +87,10 @@
                     <small>3 days ago</small>
                   </div>
                   <p class="mb-1">{{ audio.description }}</p>
-                  <button class="btn btn-sm btn-warning center-block" (click)="play(audio.file)">Play</button>
-                  <button class="btn btn-sm btn-secondary center-block">Download</button>
-                  <button class="btn btn-sm btn-danger center-block">Delete</button>
+                  <button class="btn btn-sm btn-primary center-block playback" (click)="play(audio.file)"><i class="fa fa-play" aria-hidden="true"></i></button>
+                  <button class="btn btn-sm btn-danger center-block playback"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </div>
               </div>
-
 
   
         <hr>
