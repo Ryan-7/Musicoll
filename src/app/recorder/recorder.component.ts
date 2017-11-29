@@ -30,18 +30,15 @@ export class RecorderComponent implements OnInit {
   stopRecording() {
     console.log('Stop recording');
     this.audioRecorder.stop();
+    this.audioRecorder.exportWAV((blob) => {
+      var url = (window.URL).createObjectURL(blob);
+      this.audio.nativeElement.src = url;
+    });
   }
 
   saveRecording(){
     console.log('download');
-    this.audioRecorder.exportWAV(this.doneEncoding.bind(this)); 
-    // 'this' in its current context refers to this object, 'RecorderComponent' 
-    // we bind it so when using 'this' within doneEncoding(), it will refer to RecorderComponent
-  }
 
-  doneEncoding(blob) {
-    var url = (window.URL).createObjectURL(blob);
-    this.audio.nativeElement.src = url;
   }
 
   streamSuccess(stream: MediaStream) {
@@ -63,11 +60,16 @@ export class RecorderComponent implements OnInit {
     
     let mediaConstraints = {
       audio: {
-        echoCancellation: false
+        echoCancellation: false,
+        echoCancelation: false, // TypeScript / IE Edge has a spelling error. 
+        noiseSuppression: false // FireFox, sounds terrible with this set to true while recording instruments.
       } as any
     }
-    console.log(navigator.mediaDevices.getSupportedConstraints()); // Current constraint options 
+    console.log(navigator.mediaDevices)
+    navigator.mediaDevices.getSupportedConstraints()['echoCancellation'] = false; // Current constraint options 
+    console.log(navigator.mediaDevices.getSupportedConstraints())
     navigator.mediaDevices.getUserMedia(mediaConstraints).then((stream) => {
+      navigator.mediaDevices.getSupportedConstraints()['echoCancellation'] = false
       this.streamSuccess(stream);
     }).catch((e) => {
       console.log(e);
