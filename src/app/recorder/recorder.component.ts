@@ -8,37 +8,49 @@ declare var Recorder;
   templateUrl: './recorder.component.html',
   styleUrls: ['./recorder.component.scss']
 })
-export class RecorderComponent implements OnInit {
+export class RecorderComponent implements OnInit, OnDestroy {
 
-  @ViewChild('audio') audio;
+  @ViewChild('audioPlayback') audioPlayback;
 
   private audioContext: AudioContext;
   private stream: MediaStream;
 
   realAudioInput = null;
   audioRecorder = null;
+
+  recording: boolean = false;
+  recorderHasTrack: boolean = false;
   
   
   constructor() { }
 
   startRecording() {
     console.log('start recording');
+    this.recording = true;
     this.audioRecorder.clear();
     this.audioRecorder.record();
   }
 
   stopRecording() {
     console.log('Stop recording');
+    this.recording = false;
     this.audioRecorder.stop();
     this.audioRecorder.exportWAV((blob) => {
       var url = (window.URL).createObjectURL(blob);
-      this.audio.nativeElement.src = url;
+      this.audioPlayback.nativeElement.src = url;
+      if (this.audioPlayback.nativeElement.src !== "") {
+        this.recorderHasTrack = true;
+      }
     });
   }
 
   saveRecording(){
     console.log('download');
+  }
 
+  deleteRecording() {
+    this.audioPlayback.nativeElement.src = "";
+    this.recorderHasTrack = false;
   }
 
   streamSuccess(stream: MediaStream) {
@@ -50,8 +62,8 @@ export class RecorderComponent implements OnInit {
 
   ngOnInit() {
 
-  //  console.log(this.audio);
-
+    console.log(this.audioPlayback.nativeElement.src);
+    this.audioPlayback.nativeElement.src = "";
     // console.log(!navigator.getUserMedia)
     // if (!navigator.getUserMedia)
     //   navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -77,7 +89,9 @@ export class RecorderComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.audioContext.close();
+    console.log('destroyed')
+    this.audioContext.close();  // Prevent several audio instances
+    this.recording = false; 
   }
  
 }

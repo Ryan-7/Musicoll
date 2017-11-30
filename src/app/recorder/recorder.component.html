@@ -1,7 +1,19 @@
 
-<button class="btn btn-success">Start Recording <i class="fa fa-microphone" aria-hidden="true"></i></button>
-<!-- <button class="btn btn-success">Stop Recording <i class="fa fa-microphone-slash" aria-hidden="true"></i></button> -->
+<button class="btn btn-success" *ngIf="!recording && !recorderHasTrack" (click)="startRecording()">Start Recording <i class="fa fa-microphone" aria-hidden="true"></i></button>
+<button class="btn btn-danger" *ngIf="recording && !recorderHasTrack" (click)="stopRecording()">Stop Recording <i class="fa fa-microphone-slash" aria-hidden="true"></i></button>
 
+<br><br>
+<p class="recording animated infinite flash" *ngIf="recording">Recording... <i class="fa fa-microphone" aria-hidden="true"></i></p>
+
+<div [hidden]="!recorderHasTrack">
+<audio #audioPlayback controls>
+    Your browser does not support the audio element.
+</audio>
+<br>
+<button class="btn btn-primary center-block" (click)="saveRecording()">Save to Project</button>
+<button class="btn btn-danger center-block" (click)="deleteRecording()">Delete Recording</button>
+
+</div>
 
 <!-- <div class="col-xs-12">
   <button md-raised-button color="primary" (click)="startRecording()"> Record </button>
@@ -9,6 +21,4 @@
   <button md-raised-button color="primary"  (click)="saveRecording()" id="save"> Download</button>
 </div>
 
-<audio #audio controls>
-Your browser does not support the audio element.
-</audio> -->
+-->
