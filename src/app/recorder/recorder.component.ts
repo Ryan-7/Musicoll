@@ -63,12 +63,7 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    console.log(this.audioPlayback.nativeElement.src);
     this.audioPlayback.nativeElement.src = "";
-    // console.log(!navigator.getUserMedia)
-    // if (!navigator.getUserMedia)
-    //   navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    
     this.audioContext = new AudioContext();
     
     let mediaConstraints = {
@@ -81,7 +76,6 @@ export class RecorderComponent implements OnInit, OnDestroy {
     console.log(navigator.mediaDevices.getSupportedConstraints()); // Differs by browser 
 
     navigator.mediaDevices.getUserMedia(mediaConstraints).then((stream) => {
-      navigator.mediaDevices.getSupportedConstraints()['echoCancellation'] = false
       this.streamSuccess(stream);
     }).catch((e) => {
       console.log(e);
