@@ -20,6 +20,7 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
   recording: boolean = false;
   recorderHasTrack: boolean = false;
+  errorRecording: boolean = false;
   
   
   constructor() { }
@@ -77,14 +78,14 @@ export class RecorderComponent implements OnInit, OnDestroy {
         noiseSuppression: false // FireFox, sounds terrible with this set to true while recording instruments.
       } as any
     }
-    console.log(navigator.mediaDevices)
-    navigator.mediaDevices.getSupportedConstraints()['echoCancellation'] = false; // Current constraint options 
-    console.log(navigator.mediaDevices.getSupportedConstraints())
+    console.log(navigator.mediaDevices.getSupportedConstraints()); // Differs by browser 
+
     navigator.mediaDevices.getUserMedia(mediaConstraints).then((stream) => {
       navigator.mediaDevices.getSupportedConstraints()['echoCancellation'] = false
       this.streamSuccess(stream);
     }).catch((e) => {
       console.log(e);
+      this.errorRecording = true;
     })
   }
 

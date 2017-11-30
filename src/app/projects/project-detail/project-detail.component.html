@@ -40,6 +40,20 @@
     </div>
 </div>
 
+<div class="card animated slideInDown" *ngIf="audioHelp">
+    <div class="card-body text-center">
+        <h4 class="card-title">Audio Recording</h4>
+        <p class="card-text text-center">This app uses your built-in computer microphone or external connected USB mic to record audio.</p>
+        <p class="card-text text-center">If you are experiencing issues, please make sure: </p>
+        <ul>
+            <li>You have allowed and given permission for the browser to access the microphone.</li>
+            <li>You are using a modern and updated browser such as Chrome or Firefox.</li>
+            <li>You are recording from a laptop or desktop computer. Mobile recording will be implemented in the future when this technology has become more standard.</li>
+        </ul>
+        <a class="btn btn-info" (click)="closeAudioHelpModal()">Close</a>
+    </div>
+</div>
+
 
 <div *ngIf="!loading">
     <div class="jumbotron">
@@ -67,7 +81,7 @@
 
         <!-- Audio-->
 
-        <p>Audio | <span class="edit"><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></p>
+        <p>Audio | <span class="edit" (click)="audioHelpModal()"><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></p>
         <!-- <audio controls>
                 <source src="" type="audio/ogg">
                 <source src="" type="audio/mpeg">
