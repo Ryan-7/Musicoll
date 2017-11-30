@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 
 declare var Recorder; 
 
@@ -8,37 +8,50 @@ declare var Recorder;
   templateUrl: './recorder.component.html',
   styleUrls: ['./recorder.component.scss']
 })
-export class RecorderComponent implements OnInit {
+export class RecorderComponent implements OnInit, OnDestroy {
 
-  @ViewChild('audio') audio;
+  @ViewChild('audioPlayback') audioPlayback;
 
   private audioContext: AudioContext;
   private stream: MediaStream;
 
   realAudioInput = null;
   audioRecorder = null;
+
+  recording: boolean = false;
+  recorderHasTrack: boolean = false;
+  errorRecording: boolean = false;
   
   
   constructor() { }
 
   startRecording() {
     console.log('start recording');
+    this.recording = true;
     this.audioRecorder.clear();
     this.audioRecorder.record();
   }
 
   stopRecording() {
     console.log('Stop recording');
+    this.recording = false;
     this.audioRecorder.stop();
     this.audioRecorder.exportWAV((blob) => {
       var url = (window.URL).createObjectURL(blob);
-      this.audio.nativeElement.src = url;
+      this.audioPlayback.nativeElement.src = url;
+      if (this.audioPlayback.nativeElement.src !== "") {
+        this.recorderHasTrack = true;
+      }
     });
   }
 
   saveRecording(){
     console.log('download');
+  }
 
+  deleteRecording() {
+    this.audioPlayback.nativeElement.src = "";
+    this.recorderHasTrack = false;
   }
 
   streamSuccess(stream: MediaStream) {
@@ -50,12 +63,7 @@ export class RecorderComponent implements OnInit {
 
   ngOnInit() {
 
-  //  console.log(this.audio);
-
-    // console.log(!navigator.getUserMedia)
-    // if (!navigator.getUserMedia)
-    //   navigator.getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    
+    this.audioPlayback.nativeElement.src = "";
     this.audioContext = new AudioContext();
     
     let mediaConstraints = {
@@ -65,15 +73,20 @@ export class RecorderComponent implements OnInit {
         noiseSuppression: false // FireFox, sounds terrible with this set to true while recording instruments.
       } as any
     }
-    console.log(navigator.mediaDevices)
-    navigator.mediaDevices.getSupportedConstraints()['echoCancellation'] = false; // Current constraint options 
-    console.log(navigator.mediaDevices.getSupportedConstraints())
+    console.log(navigator.mediaDevices.getSupportedConstraints()); // Differs by browser 
+
     navigator.mediaDevices.getUserMedia(mediaConstraints).then((stream) => {
-      navigator.mediaDevices.getSupportedConstraints()['echoCancellation'] = false
       this.streamSuccess(stream);
     }).catch((e) => {
       console.log(e);
+      this.errorRecording = true;
     })
+  }
+
+  ngOnDestroy() {
+    console.log('destroyed')
+    this.audioContext.close();  // Prevent several audio instances
+    this.recording = false; 
   }
  
 }

@@ -1,13 +1,17 @@
-<hr>
-<h2>Recording Component</h2>
-<hr>
 
-<div class="col-xs-12">
-  <button md-raised-button color="primary" (click)="startRecording()"> Record </button>
-  <button md-raised-button color="primary" (click)="stopRecording()"> Stop</button>
-  <button md-raised-button color="primary"  (click)="saveRecording()" id="save"> Download</button>
+<button class="btn btn-success" *ngIf="!recording && !recorderHasTrack" (click)="startRecording()">Start Recording <i class="fa fa-microphone" aria-hidden="true"></i></button>
+<button class="btn btn-danger" *ngIf="recording && !recorderHasTrack" (click)="stopRecording()">Stop Recording <i class="fa fa-microphone-slash" aria-hidden="true"></i></button>
+
+<p class="text-center error-message" *ngIf="errorRecording"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> There was a problem accessing your device's microphone.</p>
+
+<br><br>
+<p class="recording animated infinite flash" *ngIf="recording">Recording... <i class="fa fa-microphone" aria-hidden="true"></i></p>
+
+<div [hidden]="!recorderHasTrack">
+  <audio #audioPlayback controls>
+      Your browser does not support the audio element.
+  </audio>
+  <br>
+  <button class="btn btn-primary center-block" (click)="saveRecording()">Save to Project</button>
+  <button class="btn btn-danger center-block" (click)="deleteRecording()">Delete Recording</button>
 </div>
-
-<audio #audio controls>
-Your browser does not support the audio element.
-</audio>

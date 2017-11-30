@@ -109,7 +109,7 @@ input {
  }
 
  .list-small {
-     width: 50%;
+     width: 75%;
      margin: 0 auto;
  }
 
@@ -170,4 +170,17 @@ p {
 .option:hover {
     cursor: pointer;
     color: black;
+}
+
+.playback {
+    min-width: 50px;
+}
+
+ul li {
+    text-align: left;
+    font-size: 14px;
+}
+
+.align-left {
+    text-align: left;
 }

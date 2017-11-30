@@ -40,6 +40,20 @@
     </div>
 </div>
 
+<div class="card animated slideInDown" *ngIf="audioHelp">
+    <div class="card-body text-center">
+        <h4 class="card-title">Audio Recording</h4>
+        <p class="card-text text-center">This app uses your built-in computer microphone or external connected USB mic to record audio.</p>
+        <p class="card-text text-center">If you are experiencing issues, please make sure: </p>
+        <ul>
+            <li>You have allowed and given permission for the browser to access the microphone.</li>
+            <li>You are using a modern and updated browser such as Chrome or Firefox.</li>
+            <li>You are recording from a laptop or desktop computer. Mobile recording will be implemented in the future when this technology has become more standard.</li>
+        </ul>
+        <a class="btn btn-info" (click)="closeAudioHelpModal()">Close</a>
+    </div>
+</div>
+
 
 <div *ngIf="!loading">
     <div class="jumbotron">
@@ -65,19 +79,21 @@
         </div>
         <hr>
 
-        <!-- Tracks -->
+        <!-- Audio-->
 
-        <p>Tracks</p>
-        <audio controls>
+        <p>Audio | <span class="edit" (click)="audioHelpModal()"><i class="fa fa-question-circle-o" aria-hidden="true"></i></span></p>
+        <!-- <audio controls>
                 <source src="" type="audio/ogg">
                 <source src="" type="audio/mpeg">
               Your browser does not support the audio element.
-        </audio><br><br>
-        <button class="btn btn-sm btn-info">Upload Audio</button>
-        <button class="btn btn-sm btn-success">Record Audio</button>
+        </audio><br><br> -->
 
-<br><br>
+       
+        <app-recorder></app-recorder>
 
+
+        <br><br>
+      
         <div class="list-group list-small" *ngFor="let audio of project.audio">
                 <div class="list-group-item list-group-item-action flex-column align-items-start">
                   <div class="d-flex w-100 justify-content-between">
@@ -85,12 +101,10 @@
                     <small>3 days ago</small>
                   </div>
                   <p class="mb-1">{{ audio.description }}</p>
-                  <button class="btn btn-sm btn-warning center-block" (click)="play(audio.file)">Play</button>
-                  <button class="btn btn-sm btn-secondary center-block">Download</button>
-                  <button class="btn btn-sm btn-danger center-block">Delete</button>
+                  <button class="btn btn-sm btn-primary center-block playback" (click)="play(audio.file)"><i class="fa fa-play" aria-hidden="true"></i></button>
+                  <button class="btn btn-sm btn-danger center-block playback"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </div>
               </div>
-
 
   
         <hr>

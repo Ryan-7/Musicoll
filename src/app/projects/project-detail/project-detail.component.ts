@@ -34,6 +34,15 @@ export class ProjectDetailComponent implements OnInit {
 
   deletingProject: boolean = false;
   toPdf: boolean = false;
+  audioHelp: boolean = false;
+
+  audioHelpModal() {
+    this.audioHelp = true;
+  }
+
+  closeAudioHelpModal() {
+    this.audioHelp = false;
+  }
 
   pdfModal() {
     this.toPdf = true;
