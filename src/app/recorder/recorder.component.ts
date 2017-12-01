@@ -11,6 +11,7 @@ declare var Recorder;
 export class RecorderComponent implements OnInit, OnDestroy {
 
   @ViewChild('audioPlayback') audioPlayback;
+  @ViewChild('downloadAudio') downloadAudio;
 
   private audioContext: AudioContext;
   private stream: MediaStream;
@@ -39,10 +40,17 @@ export class RecorderComponent implements OnInit, OnDestroy {
     this.audioRecorder.exportWAV((blob) => {
       var url = (window.URL).createObjectURL(blob);
       this.audioPlayback.nativeElement.src = url;
+      console.log(this.audioPlayback.nativeElement.src)
       if (this.audioPlayback.nativeElement.src !== "") {
         this.recorderHasTrack = true;
       }
+
+      this.downloadAudio.nativeElement.download = "output.wav";
+      this.downloadAudio.nativeElement.href = url;
+      console.log(this.downloadAudio)
     });
+
+
   }
 
   saveRecording(){
@@ -56,13 +64,13 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
   streamSuccess(stream: MediaStream) {
     this.realAudioInput = this.audioContext.createMediaStreamSource(stream);
-    this.audioRecorder = new Recorder( this.realAudioInput );
+    this.audioRecorder = new Recorder( this.realAudioInput, {numChannels: 1} ); // Mono
   }
 
 
 
   ngOnInit() {
-
+    console.log(this.downloadAudio.nativeElement.href)
     this.audioPlayback.nativeElement.src = "";
     this.audioContext = new AudioContext();
     
