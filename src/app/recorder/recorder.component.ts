@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import * as RecordRTC from 'recordrtc';
 
-declare var Recorder; 
-
+declare const navigator: any;
+declare const MediaRecorder: any;
 
 @Component({
   selector: 'app-recorder',
@@ -13,11 +14,9 @@ export class RecorderComponent implements OnInit, OnDestroy {
   @ViewChild('audioPlayback') audioPlayback;
   @ViewChild('downloadAudio') downloadAudio;
 
-  private audioContext: AudioContext;
-  private stream: MediaStream;
 
-  realAudioInput = null;
-  audioRecorder = null;
+  private chunks: any = [];
+  private mediaRecorder: any;
 
   recording: boolean = false;
   recorderHasTrack: boolean = false;
@@ -29,27 +28,25 @@ export class RecorderComponent implements OnInit, OnDestroy {
   startRecording() {
     console.log('start recording');
     this.recording = true;
-    this.audioRecorder.clear();
-    this.audioRecorder.record();
+    this.mediaRecorder.start();
   }
 
   stopRecording() {
     console.log('Stop recording');
     this.recording = false;
-    this.audioRecorder.stop();
-    this.audioRecorder.exportWAV((blob) => {
-      var url = (window.URL).createObjectURL(blob);
-      this.audioPlayback.nativeElement.src = url;
-      console.log(this.audioPlayback.nativeElement.src)
-      if (this.audioPlayback.nativeElement.src !== "") {
-        this.recorderHasTrack = true;
-      }
+    this.mediaRecorder.stop();
 
-      this.downloadAudio.nativeElement.download = "output.wav";
+    this.mediaRecorder.onstop = (e) => {
+      const audio = new Audio();
+      const blob = new Blob(this.chunks, { 'type': 'audio/ogg; codecs=opus' });
+      this.chunks.length = 0;
+      var url = (window.URL).createObjectURL(blob)
+      this.downloadAudio.nativeElement.download = "output.ogg";
       this.downloadAudio.nativeElement.href = url;
-      console.log(this.downloadAudio)
-    });
+      this.audioPlayback.nativeElement.src = url;
+    };
 
+    this.recorderHasTrack = true;
 
   }
 
@@ -63,17 +60,13 @@ export class RecorderComponent implements OnInit, OnDestroy {
   }
 
   streamSuccess(stream: MediaStream) {
-    this.realAudioInput = this.audioContext.createMediaStreamSource(stream);
-    this.audioRecorder = new Recorder( this.realAudioInput, {numChannels: 1} ); // Mono
+    this.mediaRecorder = new MediaRecorder(stream);
+    this.mediaRecorder.ondataavailable = e => this.chunks.push(e.data);
   }
 
 
-
   ngOnInit() {
-    console.log(this.downloadAudio.nativeElement.href)
-    this.audioPlayback.nativeElement.src = "";
-    this.audioContext = new AudioContext();
-    
+
     let mediaConstraints = {
       audio: {
         echoCancellation: false,
@@ -81,7 +74,6 @@ export class RecorderComponent implements OnInit, OnDestroy {
         noiseSuppression: false // FireFox, sounds terrible with this set to true while recording instruments.
       } as any
     }
-    console.log(navigator.mediaDevices.getSupportedConstraints()); // Differs by browser 
 
     navigator.mediaDevices.getUserMedia(mediaConstraints).then((stream) => {
       this.streamSuccess(stream);
@@ -89,12 +81,11 @@ export class RecorderComponent implements OnInit, OnDestroy {
       console.log(e);
       this.errorRecording = true;
     })
+
   }
 
   ngOnDestroy() {
-    console.log('destroyed')
-    this.audioContext.close();  // Prevent several audio instances
-    this.recording = false; 
+     this.recording = false; 
   }
  
 }

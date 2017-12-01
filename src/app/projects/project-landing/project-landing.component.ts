@@ -13,24 +13,8 @@ declare function saveAudio();
   styleUrls: ['./project-landing.component.scss']
 })
 export class ProjectLandingComponent implements OnInit {
-  
-
-
 
   constructor() { }
-
- 
-  startRecording() {
-    startRecording();
-  }
-
-  stopRecording() {
-    stopRecording();
-  }
-
-  saveRecording() {
-    saveAudio();
-  }
 
   ngOnInit() {
 
