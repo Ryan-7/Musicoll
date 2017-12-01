@@ -7,7 +7,7 @@
 <br><br>
 <p class="recording animated infinite flash" *ngIf="recording">Recording... <i class="fa fa-microphone" aria-hidden="true"></i></p>
 
-<div [hidden]="!recorderHasTrack">
+<!-- <div [hidden]="!recorderHasTrack"> -->
   <audio #audioPlayback controls>
       Your browser does not support the audio element.
   </audio>
@@ -15,4 +15,4 @@
   <button class="btn btn-primary center-block" (click)="saveRecording()">Save to Project</button>
   <button class="btn btn-danger center-block" (click)="deleteRecording()">Delete Recording</button>
   <a class="btn btn-info center-block" #downloadAudio >Download Recording</a>
-</div>
+<!-- </div> -->
