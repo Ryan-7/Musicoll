@@ -17,6 +17,7 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
   private chunks: any = [];
   private mediaRecorder: any;
+  private blob: Blob;
 
   recording: boolean = false;
   recorderHasTrack: boolean = false;
@@ -38,9 +39,9 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
     this.mediaRecorder.onstop = (e) => {
       const audio = new Audio();
-      const blob = new Blob(this.chunks, { 'type': 'audio/ogg; codecs=opus' });
+      this.blob = new Blob(this.chunks, { 'type': 'audio/ogg; codecs=opus' });
       this.chunks.length = 0;
-      var url = (window.URL).createObjectURL(blob)
+      var url = (window.URL).createObjectURL(this.blob)
       this.downloadAudio.nativeElement.download = "output.ogg";
       this.downloadAudio.nativeElement.href = url;
       this.audioPlayback.nativeElement.src = url;
