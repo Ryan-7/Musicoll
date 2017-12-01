@@ -16,6 +16,10 @@ export class ProjectLandingComponent implements OnInit {
   private chunks: any = [];
   private mediaRecorder: any;
 
+  @ViewChild('downloadAudio') downloadAudio;
+  @ViewChild('audioPlayback') audioPlayback
+
+  // this should placed in onInit();
   constructor() {
     const onSuccess = stream => {
       this.mediaRecorder = new MediaRecorder(stream);
@@ -24,8 +28,10 @@ export class ProjectLandingComponent implements OnInit {
         const blob = new Blob(this.chunks, { 'type': 'audio/ogg; codecs=opus' });
         this.chunks.length = 0;
         audio.src = window.URL.createObjectURL(blob);
-        audio.load();
-        audio.play();
+        var url = (window.URL).createObjectURL(blob)
+        this.downloadAudio.nativeElement.download = "output.ogg";
+        this.downloadAudio.nativeElement.href = url;
+        this.audioPlayback.nativeElement.src = url
       };
 
       this.mediaRecorder.ondataavailable = e => this.chunks.push(e.data);
@@ -36,7 +42,9 @@ export class ProjectLandingComponent implements OnInit {
       navigator.mozGetUserMedia ||
       navigator.msGetUserMedia);
 
-    navigator.getUserMedia({ audio: true }, onSuccess, e => console.log(e));
+    navigator.getUserMedia({ audio: {
+      echoCancellation: false
+    } }, onSuccess, e => console.log(e));
   }
 
   public record() {
@@ -49,6 +57,8 @@ export class ProjectLandingComponent implements OnInit {
     this.isRecording = false;
     this.mediaRecorder.stop();
     console.log(this.chunks)
+
+
   }
 
   ngOnInit() {
