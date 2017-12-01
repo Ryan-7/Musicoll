@@ -39,6 +39,16 @@ export class RecorderComponent implements OnInit, OnDestroy {
     this.mediaRecorder.stop();
 
 
+    this.mediaRecorder.onstop = (e) => {
+      const audio = new Audio();
+      const blob = new Blob(this.chunks, { 'type': 'audio/ogg; codecs=opus' });
+      this.chunks.length = 0;
+      var url = (window.URL).createObjectURL(blob)
+      this.downloadAudio.nativeElement.download = "output.ogg";
+      this.downloadAudio.nativeElement.href = url;
+      this.audioPlayback.nativeElement.src = url
+    };
+
     // this.audioRecorder.exportWAV((blob) => {
     //   var url = (window.URL).createObjectURL(blob);
     //   this.audioPlayback.nativeElement.src = url;
@@ -65,29 +75,19 @@ export class RecorderComponent implements OnInit, OnDestroy {
   }
 
   streamSuccess(stream: MediaStream) {
-    // this.realAudioInput = this.audioContext.createMediaStreamSource(stream);
-    // this.audioRecorder = new Recorder( this.realAudioInput, {numChannels: 1} ); // Mono
+    this.mediaRecorder = new MediaRecorder(stream);
+    this.mediaRecorder.ondataavailable = e => this.chunks.push(e.data);
   }
-
 
 
   ngOnInit() {
 
-    const onSuccess = stream => {
+    const onSuccess = (stream) => {
       this.mediaRecorder = new MediaRecorder(stream);
-      this.mediaRecorder.onstop = e => {
-        const audio = new Audio();
-        const blob = new Blob(this.chunks, { 'type': 'audio/ogg; codecs=opus' });
-        this.chunks.length = 0;
-        audio.src = window.URL.createObjectURL(blob);
-        var url = (window.URL).createObjectURL(blob)
-        this.downloadAudio.nativeElement.download = "output.ogg";
-        this.downloadAudio.nativeElement.href = url;
-        this.audioPlayback.nativeElement.src = url
-      };
-
       this.mediaRecorder.ondataavailable = e => this.chunks.push(e.data);
     };
+
+
 
     navigator.getUserMedia = (navigator.getUserMedia ||
       navigator.webkitGetUserMedia ||
@@ -97,6 +97,11 @@ export class RecorderComponent implements OnInit, OnDestroy {
     navigator.getUserMedia({ audio: {
       echoCancellation: false
     } }, onSuccess, e => console.log(e));
+
+
+
+    
+
 
     // console.log(this.downloadAudio.nativeElement.href)
     // this.audioPlayback.nativeElement.src = "";
