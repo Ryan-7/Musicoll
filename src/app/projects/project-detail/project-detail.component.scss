@@ -184,3 +184,36 @@ ul li {
 .align-left {
     text-align: left;
 }
+
+.mobile-delete {
+    margin-bottom: 25px;
+}
+
+@media screen and (max-width: 767px) {
+    .toolbar {
+        display: none;
+    }
+
+    .title-responsive {
+        font-size: 150%;
+    }
+
+    .list-small {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .jumbotron {
+        padding: 1rem;
+    }
+
+    .lyrics {
+        overflow: hidden;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    .mobile-delete {
+        display: none;
+    }
+}
