@@ -56,9 +56,11 @@ export class RecorderComponent implements OnInit, OnDestroy {
   }
 
   saveRecording(){
-    console.log('download');
+    console.log('Save to Project');
+    console.log(this.currentProjectId); 
     console.log(this.trackName);
     console.log(this.trackDescription);
+    // Hit HTTP service with blob, track name, track description, and project ID to add it under. 
   }
 
   deleteRecording() {
@@ -73,8 +75,6 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
-    console.log(this.currentProjectId); 
 
     let mediaConstraints = {
       audio: {

@@ -31,4 +31,8 @@ export class HttpService {
     return this.httpClient.patch('http://localhost:3000/api/projects/' + projectId, dataToSave);
   }
 
+  addAudio(projectId, trackInfo, blob) {
+    return this.httpClient.put('http://localhost:3000/api/audio/' + projectId, trackInfo, blob); 
+  }
+
 }

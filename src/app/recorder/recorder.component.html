@@ -14,10 +14,10 @@
   <br>
 
   <div class="form-sm">
-      <input type="text" class="form-control" placeholder="Name">
-      <input type="text" class="form-control" placeholder="Description">
+      <input type="text" class="form-control" [(ngModel)]="trackName" placeholder="Name" maxlength="30">
+      <input type="text" class="form-control" [(ngModel)]="trackDescription" placeholder="Description" maxlength="100">
   </div>  
-  <button class="btn btn-primary btn-md center-block" (click)="saveRecording()">Save to Project</button>
+  <button class="btn btn-primary btn-md center-block" (click)="saveRecording()" [disabled]="trackName?.length < 1 || trackDescription?.length < 1">Save to Project</button>
   <button class="btn btn-danger btn-md center-block" (click)="deleteRecording()">Delete Recording</button>
   <a class="btn btn-info btn-md center-block" #downloadAudio >Download Recording</a>
 
