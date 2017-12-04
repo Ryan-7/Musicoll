@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
 import * as RecordRTC from 'recordrtc';
 
 declare const navigator: any;
@@ -19,10 +19,14 @@ export class RecorderComponent implements OnInit, OnDestroy {
   private mediaRecorder: any;
   private blob: Blob;
 
+  @Input() currentProjectId;
+
   recording: boolean = false;
   recorderHasTrack: boolean = false;
   errorRecording: boolean = false;
   
+  trackName: string;
+  trackDescription: string;
   
   constructor() { }
 
@@ -53,6 +57,8 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
   saveRecording(){
     console.log('download');
+    console.log(this.trackName);
+    console.log(this.trackDescription);
   }
 
   deleteRecording() {
@@ -67,6 +73,8 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+
+    console.log(this.currentProjectId); 
 
     let mediaConstraints = {
       audio: {

@@ -38,6 +38,7 @@ export class ProjectDetailComponent implements OnInit {
 
   audioHelpModal() {
     this.audioHelp = true;
+    window.scrollTo(0, 0);
   }
 
   closeAudioHelpModal() {

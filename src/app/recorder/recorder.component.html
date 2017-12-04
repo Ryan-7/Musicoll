@@ -12,7 +12,13 @@
       Your browser does not support the audio element.
   </audio>
   <br>
-  <button class="btn btn-primary center-block" (click)="saveRecording()">Save to Project</button>
-  <button class="btn btn-danger center-block" (click)="deleteRecording()">Delete Recording</button>
-  <a class="btn btn-info center-block" #downloadAudio >Download Recording</a>
+
+  <div class="form-sm">
+      <input type="text" class="form-control" placeholder="Name">
+      <input type="text" class="form-control" placeholder="Description">
+  </div>  
+  <button class="btn btn-primary btn-md center-block" (click)="saveRecording()">Save to Project</button>
+  <button class="btn btn-danger btn-md center-block" (click)="deleteRecording()">Delete Recording</button>
+  <a class="btn btn-info btn-md center-block" #downloadAudio >Download Recording</a>
+
 </div>
