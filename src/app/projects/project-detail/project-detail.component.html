@@ -67,7 +67,7 @@
 
         <div *ngIf="editingTitle">
             <div class="md-form">
-                <input type="text" id="form1" class="form-control" #title value="{{ project.name }}">
+                <input type="text" id="form1" class="form-control title-responsive" #title value="{{ project.name }}">
             </div>
             <div *ngIf="!savingTitle">
                 <button class="btn btn-sm btn-primary" (click)="save('title')">Save</button>
@@ -148,5 +148,8 @@
         </div>
 
     </div>
+
+    <button class="btn btn-danger center-block mobile-delete" (click)="deleteModal()">Delete Project</button>
     
 </div>
+
