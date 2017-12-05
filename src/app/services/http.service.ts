@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http, RequestOptions, ResponseOptions } from '@angular/http';
 import * as _ from 'lodash';
-import {Headers} from '@angular/http' 
+
 @Injectable()
 export class HttpService {
 
@@ -35,13 +35,19 @@ export class HttpService {
   //   return this.httpClient.put('http://localhost:3000/api/audio/' + projectId, trackInfo, blob); 
   // }
 
-  addAudio(projectId, blob, trackInfo) {
+  // addAudio(projectId, blob, trackInfo) {
+  //   let formData = new FormData();
+  //   formData.append('upload', blob, { header: { contentType: 'text/plain; charset=UTF-8' } });
+  //   console.log(formData);
+  //   return this.httpClient.post('http://localhost:3000/api/projects/audio/' + projectId, formData, {responseType: "blob"}); 
+  // }
+
+  addAudio(projectId, trackInfo) {
     let formData = new FormData();
+    let content = 'Hello this is some text';
+    let blob = new Blob([content], {type: "multipart/form-data"});
     formData.append('upload', blob);
-    const headers = new Headers();
-    headers.append('Content-Type', 'audio/ogg');
-    let options = { headers: new HttpHeaders({ 'Content-Type': ' multipart/form-data' })," responseType": 'blob' };
-    return this.httpClient.post('http://localhost:3000/api/projects/audio/' + projectId, formData, options); 
+    return this.httpClient.post('http://localhost:3000/api/projects/audio/' + projectId, formData, {responseType: "blob"}); 
   }
 
 }

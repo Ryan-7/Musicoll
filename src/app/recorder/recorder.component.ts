@@ -67,9 +67,13 @@ export class RecorderComponent implements OnInit, OnDestroy {
  //   console.log(this.currentProjectId); 
     console.log(this.blob)
     // Hit HTTP service with blob, track name, track description, and project ID to add it under. 
-    this.httpService.addAudio(this.currentProjectId, this.blob, trackInfo).subscribe((res) => {
+    this.httpService.addAudio(this.currentProjectId, trackInfo).subscribe((res) => {
       console.log('song:')
       console.log(res);
+      var url = (window.URL).createObjectURL(res)
+      this.downloadAudio.nativeElement.download = "output.ogg";
+      this.downloadAudio.nativeElement.href = url;
+      this.audioPlayback.nativeElement.src = url;
     });
   }
 
