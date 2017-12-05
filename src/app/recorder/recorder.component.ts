@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
+import { HttpService } from './../services/http.service';
 import * as RecordRTC from 'recordrtc';
+
 
 declare const navigator: any;
 declare const MediaRecorder: any;
@@ -28,7 +30,7 @@ export class RecorderComponent implements OnInit, OnDestroy {
   trackName: string;
   trackDescription: string;
   
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   startRecording() {
     console.log('start recording');
@@ -46,6 +48,7 @@ export class RecorderComponent implements OnInit, OnDestroy {
       this.blob = new Blob(this.chunks, { 'type': 'audio/ogg; codecs=opus' });
       this.chunks.length = 0;
       var url = (window.URL).createObjectURL(this.blob)
+      console.log(this.downloadAudio);
       this.downloadAudio.nativeElement.download = "output.ogg";
       this.downloadAudio.nativeElement.href = url;
       this.audioPlayback.nativeElement.src = url;
@@ -57,10 +60,17 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
   saveRecording(){
     console.log('Save to Project');
-    console.log(this.currentProjectId); 
-    console.log(this.trackName);
-    console.log(this.trackDescription);
+    let trackInfo = {
+      trackName: this.trackName,
+      trackDescription: this.trackDescription
+    }
+ //   console.log(this.currentProjectId); 
+    console.log(this.blob)
     // Hit HTTP service with blob, track name, track description, and project ID to add it under. 
+    this.httpService.addAudio(this.currentProjectId, this.blob, trackInfo).subscribe((res) => {
+      console.log('song:')
+      console.log(res);
+    });
   }
 
   deleteRecording() {
