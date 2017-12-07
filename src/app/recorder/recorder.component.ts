@@ -51,7 +51,7 @@ export class RecorderComponent implements OnInit, OnDestroy {
       console.log(this.downloadAudio);
       this.downloadAudio.nativeElement.download = "zoutput";
       this.downloadAudio.nativeElement.href = url;
-      this.audioPlayback.nativeElement.src = url;
+      this.audioPlayback.nativeElement.src = 'https://s3.us-east-2.amazonaws.com/musicollapp/blob.ogg';
     };
 
     this.recorderHasTrack = true;
@@ -70,10 +70,6 @@ export class RecorderComponent implements OnInit, OnDestroy {
     this.httpService.addAudio(this.currentProjectId, this.blob, trackInfo).subscribe((res) => {
       console.log('song:')
       console.log(res);
-      var url = (window.URL).createObjectURL(res)
-      this.downloadAudio.nativeElement.download = "output.ogg";
-      this.downloadAudio.nativeElement.href = url;
-      this.audioPlayback.nativeElement.src = url;
     });
   }
 
