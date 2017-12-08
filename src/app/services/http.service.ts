@@ -36,7 +36,7 @@ export class HttpService {
     formData.append('audio', blob);
     formData.append('body', JSON.stringify(trackInfo)); // Needs to be a string for Multer on backend
     console.log(formData);
-    return this.httpClient.post('http://localhost:3000/api/projects/audio/' + projectId, formData, {responseType: "blob"}); 
+    return this.httpClient.post('http://localhost:3000/api/projects/audio/' + projectId, formData); 
   }
 
 }

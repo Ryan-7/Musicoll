@@ -199,6 +199,10 @@ export class ProjectDetailComponent implements OnInit {
     })
   }
 
+  updateAudioListing(updatedAudio) {
+     this.project = updatedAudio;
+  }
+
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: Params) => {
       this.loading = true;

@@ -89,7 +89,7 @@
         </audio><br><br> -->
 
        
-        <app-recorder [currentProjectId]="projectId"></app-recorder>
+        <app-recorder [currentProjectId]="projectId" (onAudioTrackAdded)="updateAudioListing($event)"></app-recorder>
 
         
         <br><br>

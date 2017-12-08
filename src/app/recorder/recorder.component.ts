@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from './../services/http.service';
 import * as RecordRTC from 'recordrtc';
-
 
 declare const navigator: any;
 declare const MediaRecorder: any;
@@ -14,16 +13,15 @@ declare const MediaRecorder: any;
 export class RecorderComponent implements OnInit, OnDestroy {
 
   @ViewChild('audioPlayback') audioPlayback;
-  @ViewChild('downloadAudio') downloadAudio;
-
-  @ViewChild('audioTrack') audioTrack;
-
+  @Input() currentProjectId;
+  @Output() onAudioTrackAdded: EventEmitter<any> = new EventEmitter<any>(); 
 
   private chunks: any = [];
   private mediaRecorder: any;
   private blob: Blob;
 
-  @Input() currentProjectId;
+
+  savingRecording = false;
 
   recording: boolean = false;
   recorderHasTrack: boolean = false;
@@ -35,13 +33,11 @@ export class RecorderComponent implements OnInit, OnDestroy {
   constructor(private httpService: HttpService) { }
 
   startRecording() {
-    console.log('start recording');
     this.recording = true;
     this.mediaRecorder.start();
   }
 
   stopRecording() {
-    console.log('Stop recording');
     this.recording = false;
     this.mediaRecorder.stop();
 
@@ -50,9 +46,6 @@ export class RecorderComponent implements OnInit, OnDestroy {
       this.blob = new Blob(this.chunks, { 'type': 'audio/ogg; codecs=opus' });
       this.chunks.length = 0;
       var url = (window.URL).createObjectURL(this.blob)
-      console.log(this.downloadAudio);
-      this.downloadAudio.nativeElement.download = "zoutput";
-      this.downloadAudio.nativeElement.href = url;
       this.audioPlayback.nativeElement.src = url;
     };
 
@@ -60,25 +53,33 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
   }
 
-  saveRecording(){
-    console.log('Save to Project');
-    let trackInfo = {
-      trackName: this.trackName,
-      trackDescription: this.trackDescription
-    }
- //   console.log(this.currentProjectId); 
-    console.log(this.blob)
-    // Hit HTTP service with blob, track name, track description, and project ID to add it under. 
-    this.httpService.addAudio(this.currentProjectId, this.blob, trackInfo).subscribe((res) => {
-      console.log('song:')
-      console.log(res);
-    });
-  }
-
   deleteRecording() {
     this.audioPlayback.nativeElement.src = "";
     this.recorderHasTrack = false;
   }
+
+  saveRecording(){
+
+    // Start animation
+    this.savingRecording = true;
+
+    let trackInfo = {
+      trackName: this.trackName,
+      trackDescription: this.trackDescription
+    } 
+    this.httpService.addAudio(this.currentProjectId, this.blob, trackInfo).subscribe((res) => {
+      
+      console.log('song:')
+      console.log(res);
+
+      this.onAudioTrackAdded.emit(res); // Send updated project to parent component.
+      this.audioPlayback.nativeElement.src = ""
+      this.recorderHasTrack = false;
+      this.savingRecording = false;
+    });
+  }
+
+
 
   streamSuccess(stream: MediaStream) {
     this.mediaRecorder = new MediaRecorder(stream);
