@@ -16,8 +16,14 @@ export class ProjectDetailComponent implements OnInit {
   @ViewChild('lyrics') lyrics;
   @ViewChild('notes') notes;
 
+  @ViewChild('audioTracks') audioTracks;
+  
+
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private httpService: HttpService, private projectsComponent: ProjectsComponent) { 
   } 
+
+  audio: HTMLAudioElement = new Audio();
+  audioPlaying = false;
 
   project; // need to add model 
   projectAudio;
@@ -97,7 +103,26 @@ export class ProjectDetailComponent implements OnInit {
 
 
   play(file) {
-    console.log(file);
+    this.audio.src = file;
+    this.audio.play();
+    this.audioPlaying = true;
+  }
+
+  pause() {
+    this.audio.pause();
+    this.audioPlaying = false;
+    this.audio.loop = false;
+  }
+
+  loop(file) {
+    this.audio.src = file;
+    this.audio.loop = true;
+    this.audio.play();
+    this.audioPlaying = true;
+
+    while(this.audio.ended === false) {
+      this.audioPlaying = true;
+    }
   }
 
 
