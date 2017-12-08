@@ -16,6 +16,8 @@ export class RecorderComponent implements OnInit, OnDestroy {
   @ViewChild('audioPlayback') audioPlayback;
   @ViewChild('downloadAudio') downloadAudio;
 
+  @ViewChild('audioTrack') audioTrack;
+
 
   private chunks: any = [];
   private mediaRecorder: any;
@@ -51,7 +53,7 @@ export class RecorderComponent implements OnInit, OnDestroy {
       console.log(this.downloadAudio);
       this.downloadAudio.nativeElement.download = "zoutput";
       this.downloadAudio.nativeElement.href = url;
-      this.audioPlayback.nativeElement.src = 'https://s3.us-east-2.amazonaws.com/musicollapp/blob.ogg';
+      this.audioPlayback.nativeElement.src = url;
     };
 
     this.recorderHasTrack = true;
