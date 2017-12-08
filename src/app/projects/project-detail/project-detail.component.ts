@@ -2,6 +2,7 @@ import { ProjectsComponent } from './../projects.component';
 import { HttpService } from './../../services/http.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import moment from 'moment';
 
 declare var jsPDF; // For use of jsPDF Library. 
 
@@ -17,6 +18,7 @@ export class ProjectDetailComponent implements OnInit {
   @ViewChild('notes') notes;
 
   @ViewChild('audioTracks') audioTracks;
+  
   
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private httpService: HttpService, private projectsComponent: ProjectsComponent) { 
@@ -106,6 +108,10 @@ export class ProjectDetailComponent implements OnInit {
     this.audio.src = file;
     this.audio.play();
     this.audioPlaying = true;
+    // Send the index
+    // assign the index to a variable 
+    // Use to hide buttons ngIf*=" this.someVariable === index"
+    
   }
 
   pause() {
@@ -120,9 +126,6 @@ export class ProjectDetailComponent implements OnInit {
     this.audio.play();
     this.audioPlaying = true;
 
-    while(this.audio.ended === false) {
-      this.audioPlaying = true;
-    }
   }
 
 
