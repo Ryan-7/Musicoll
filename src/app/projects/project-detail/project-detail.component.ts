@@ -44,6 +44,10 @@ export class ProjectDetailComponent implements OnInit {
   toPdf: boolean = false;
   audioHelp: boolean = false;
 
+
+  showDeleteAudioModal = false;
+
+
   audioHelpModal() {
     this.audioHelp = true;
     window.scrollTo(0, 0);
@@ -128,8 +132,14 @@ export class ProjectDetailComponent implements OnInit {
 
   }
 
-  deleteAudioFile(audioKey) {
-    console.log(audioKey);
+  deleteAudioModal() {
+
+  }
+
+  deleteAudioFile(audioId, audioKey) {
+    this.httpService.deleteAudio(this.projectId, audioId, audioKey).subscribe((res) => {
+      this.project = res;
+    })
   }
 
 

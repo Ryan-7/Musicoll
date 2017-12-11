@@ -39,4 +39,9 @@ export class HttpService {
     return this.httpClient.post('http://localhost:3000/api/projects/audio/' + projectId, formData); 
   }
 
+  deleteAudio(projectId, audioId, audioKey) {
+
+    return this.httpClient.patch('http://localhost:3000/api/projects/audio/' + projectId, {audioId: audioId, audioKey: audioKey})
+  }
+
 }
