@@ -107,12 +107,12 @@
                   <button class="btn btn-sm btn-danger center-block playback" [disabled]="audio.isActive || audioPlaying" (click)="audio.deleteModal = !audio.deleteModal"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </div>
 
-                
+              
               <div *ngIf="audio.deleteModal">
                     <p class="text-center">Are you sure you want to delete '{{ audio.title }}' ?</p>
                     <button class="btn btn-sm btn-info" (click)="audio.deleteModal = !audio.deleteModal">Cancel</button>
                     <button class="btn btn-sm btn-danger" (click)="audio.deleteModal = !audio.deleteModal" (click)="deleteAudioFile(audio._id, audio.key)">Delete</button>
-                </div>
+              </div>
                 <br>
               </div>
 
