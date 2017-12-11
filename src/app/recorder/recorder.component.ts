@@ -88,6 +88,7 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    
 
     let mediaConstraints = {
       audio: {

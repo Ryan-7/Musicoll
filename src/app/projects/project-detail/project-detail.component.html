@@ -104,7 +104,7 @@
                   <button class="btn btn-sm btn-primary center-block playback" *ngIf="!audioPlaying" (click)="play(audio.file)"><i class="fa fa-play" aria-hidden="true"></i></button>
                   <button class="btn btn-sm btn-primary center-block playback" *ngIf="!audioPlaying" (click)="loop(audio.file)"><i class="fa fa-refresh" aria-hidden="true"></i></button>
                   <button class="btn btn-sm btn-primary center-block playback" *ngIf="audioPlaying" (click)="pause()"><i class="fa fa-stop" aria-hidden="true"></i></button>
-                  <button class="btn btn-sm btn-danger center-block playback"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  <button class="btn btn-sm btn-danger center-block playback" (click)="deleteAudioFile(audio.key)"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </div>
               </div>
 

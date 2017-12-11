@@ -128,6 +128,10 @@ export class ProjectDetailComponent implements OnInit {
 
   }
 
+  deleteAudioFile(audioKey) {
+    console.log(audioKey);
+  }
+
 
   edit(inputArea) {
     console.log(inputArea)
