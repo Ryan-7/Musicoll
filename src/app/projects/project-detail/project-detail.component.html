@@ -95,7 +95,7 @@
         <br><br>
       
         <div class="list-group list-small" *ngFor="let audio of project.audio | reverse">
-                <div class="list-group-item list-group-item-action flex-column align-items-start">
+                <div *ngIf="!audio.deleteModal" class="list-group-item list-group-item-action flex-column align-items-start">
                   <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ audio.title }}</h5>
                     <small>3 days ago</small>
@@ -104,16 +104,18 @@
                   <button class="btn btn-sm btn-primary center-block playback" [disabled]="audio.isActive || audioPlaying" (click)="play(audio.file)" (click)="audio.isActive = !audio.isActive"><i class="fa fa-play" aria-hidden="true"></i></button>
                   <button class="btn btn-sm btn-primary center-block playback" [disabled]="audio.isActive || audioPlaying" (click)="loop(audio.file)" (click)="audio.isActive = !audio.isActive"><i class="fa fa-refresh" aria-hidden="true"></i></button>
                   <button class="btn btn-sm btn-primary center-block playback" [disabled]="!audio.isActive || !audioPlaying" (click)="pause()" (click)="audio.isActive = !audio.isActive"><i class="fa fa-stop" aria-hidden="true"></i></button>
-                  <button class="btn btn-sm btn-danger center-block playback" [disabled]="audio.isActive || audioPlaying" (click)="deleteAudioFile(audio._id, audio.key)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  <button class="btn btn-sm btn-danger center-block playback" [disabled]="audio.isActive || audioPlaying" (click)="audio.deleteModal = !audio.deleteModal"><i class="fa fa-trash" aria-hidden="true"></i></button>
                 </div>
+
+                
+              <div *ngIf="audio.deleteModal">
+                    <p class="text-center">Are you sure you want to delete '{{ audio.title }}' ?</p>
+                    <button class="btn btn-sm btn-info" (click)="audio.deleteModal = !audio.deleteModal">Cancel</button>
+                    <button class="btn btn-sm btn-danger" (click)="audio.deleteModal = !audio.deleteModal" (click)="deleteAudioFile(audio._id, audio.key)">Delete</button>
+                </div>
+                <br>
               </div>
 
-              <!-- <div *ngIf="!showDeleteAudioModal">
-                    <p class="text-center">Are you sure you want to delete '{{ audio.title }}' ?</p>
-                    <button class="btn btn-sm btn-info">Cancel</button>
-                    <button class="btn btn-sm btn-danger">Delete</button>
-                </div>
-   -->
 
   
         <hr>

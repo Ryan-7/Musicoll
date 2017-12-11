@@ -45,9 +45,6 @@ export class ProjectDetailComponent implements OnInit {
   audioHelp: boolean = false;
 
 
-  showDeleteAudioModal = false;
-
-
   audioHelpModal() {
     this.audioHelp = true;
     window.scrollTo(0, 0);
@@ -132,9 +129,6 @@ export class ProjectDetailComponent implements OnInit {
 
   }
 
-  deleteAudioModal() {
-
-  }
 
   deleteAudioFile(audioId, audioKey) {
     this.httpService.deleteAudio(this.projectId, audioId, audioKey).subscribe((res) => {
