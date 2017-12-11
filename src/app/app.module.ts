@@ -19,6 +19,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { SignupComponent } from './signup/signup.component';
 import { FooterComponent } from './footer/footer.component';
 import { RecorderComponent } from './recorder/recorder.component';
+import { ReversePipe } from './shared/reverse.pipe';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { RecorderComponent } from './recorder/recorder.component';
     SignupComponent,
     FooterComponent,
     Autosize,
-    RecorderComponent
+    RecorderComponent,
+    ReversePipe
   ],
   imports: [
     BrowserModule,

@@ -193,6 +193,10 @@ ul li {
     font-size: 12px;
 }
 
+.list-group-item {
+    margin-bottom: 20px;
+}
+
 @media screen and (max-width: 767px) {
     .toolbar {
         display: none;

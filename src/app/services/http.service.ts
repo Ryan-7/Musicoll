@@ -31,8 +31,17 @@ export class HttpService {
     return this.httpClient.patch('http://localhost:3000/api/projects/' + projectId, dataToSave);
   }
 
-  addAudio(projectId, trackInfo, blob) {
-    return this.httpClient.put('http://localhost:3000/api/audio/' + projectId, trackInfo, blob); 
+  addAudio(projectId, blob, trackInfo) {
+    let formData = new FormData();
+    formData.append('audio', blob);
+    formData.append('body', JSON.stringify(trackInfo)); // Needs to be a string for Multer on backend
+    console.log(formData);
+    return this.httpClient.post('http://localhost:3000/api/projects/audio/' + projectId, formData); 
+  }
+
+  deleteAudio(projectId, audioId, audioKey) {
+
+    return this.httpClient.patch('http://localhost:3000/api/projects/audio/' + projectId, {audioId: audioId, audioKey: audioKey})
   }
 
 }

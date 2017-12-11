@@ -2,6 +2,7 @@ import { ProjectsComponent } from './../projects.component';
 import { HttpService } from './../../services/http.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import moment from 'moment';
 
 declare var jsPDF; // For use of jsPDF Library. 
 
@@ -16,8 +17,15 @@ export class ProjectDetailComponent implements OnInit {
   @ViewChild('lyrics') lyrics;
   @ViewChild('notes') notes;
 
+  @ViewChild('audioTracks') audioTracks;
+  
+  
+
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private httpService: HttpService, private projectsComponent: ProjectsComponent) { 
   } 
+
+  audio: HTMLAudioElement = new Audio();
+  audioPlaying = false;
 
   project; // need to add model 
   projectAudio;
@@ -35,6 +43,7 @@ export class ProjectDetailComponent implements OnInit {
   deletingProject: boolean = false;
   toPdf: boolean = false;
   audioHelp: boolean = false;
+
 
   audioHelpModal() {
     this.audioHelp = true;
@@ -97,7 +106,34 @@ export class ProjectDetailComponent implements OnInit {
 
 
   play(file) {
-    console.log(file);
+    this.audio.src = file;
+    this.audio.play();
+    this.audioPlaying = true;
+    // Send the index
+    // assign the index to a variable 
+    // Use to hide buttons ngIf*=" this.someVariable === index"
+    
+  }
+
+  pause() {
+    this.audio.pause();
+    this.audioPlaying = false;
+    this.audio.loop = false;
+  }
+
+  loop(file) {
+    this.audio.src = file;
+    this.audio.loop = true;
+    this.audio.play();
+    this.audioPlaying = true;
+
+  }
+
+
+  deleteAudioFile(audioId, audioKey) {
+    this.httpService.deleteAudio(this.projectId, audioId, audioKey).subscribe((res) => {
+      this.project = res;
+    })
   }
 
 
@@ -169,6 +205,10 @@ export class ProjectDetailComponent implements OnInit {
       }, 1000)
 
     })
+  }
+
+  updateAudioListing(updatedAudio) {
+     this.project = updatedAudio;
   }
 
   ngOnInit() {
