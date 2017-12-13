@@ -8,8 +8,7 @@ import { ProjectDetailComponent } from './projects/project-detail/project-detail
 import { ProjectLandingComponent } from './projects/project-landing/project-landing.component';
 
 const routes: Routes = [
- //   { path: '', component: LandingComponent},
-    { path: '', redirectTo: 'projects', pathMatch: 'full'},
+    { path: '', component: LandingComponent},
     { path: 'projects', component: ProjectsComponent, children: [
         { path: '', component: ProjectLandingComponent },
         { path: ':id', component: ProjectDetailComponent }

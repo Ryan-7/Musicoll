@@ -17,8 +17,8 @@ export class AuthService {
   }
 
   logout() {
-  //  this.httpClient.delete('http://localhost:3000/users/logout', {headers: new HttpHeaders().set('x-auth', localStorage.getItem('musicollAuth')), responseType: 'text'})
+    return this.httpClient.delete('http://localhost:3000/api/users/logout', {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth')), responseType: 'text'})
   }
 
 }
- 
+  

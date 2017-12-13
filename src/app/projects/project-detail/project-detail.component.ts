@@ -16,7 +16,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
   @ViewChild('title') title;
   @ViewChild('lyrics') lyrics;
   @ViewChild('notes') notes;
-
+ 
   @ViewChild('audioTracks') audioTracks;
   
   
