@@ -7,12 +7,13 @@ export class AuthService {
   constructor(private httpClient: HttpClient) { }
 
 
-  registerUser(email, password) {
-  //  this.httpClient.post('http://localhost:3000/api/users/register', {email: email, password: password}, {observe: 'response'})
+  // Must set responseType to text or Angular tries to parse non-existent JSON and throws an error... 
+  signup(userInfo) {
+    return this.httpClient.post('http://localhost:3000/api/users/register', userInfo, {observe: 'response', responseType: 'text'});
   }
 
-  login(email, password) {
-    // this.httpClient.post('http://localhost:3000/api/users/login, {email: email, password: password}, {responseType: 'text', observe: 'response })
+  login(userInfo) {
+    return this.httpClient.post('http://localhost:3000/api/users/login', userInfo, {observe: 'response', responseType: 'text'})
   }
 
   logout() {
@@ -20,3 +21,4 @@ export class AuthService {
   }
 
 }
+ 
