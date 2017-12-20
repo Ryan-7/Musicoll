@@ -13,19 +13,24 @@ export class SignInComponent implements OnInit {
 
   email: string;
   password: string;
+  loading: boolean = false;
+  
 
-  constructor(private authService: AuthService) { }
+
+  constructor(private authService: AuthService, private router: Router) { }
 
   signin() {
     let userInfo = {
       email: this.email,
       password: this.password
     }
+    this.loading = true;
     this.authService.login(userInfo).subscribe((res) => {
       localStorage.clear();
       localStorage.setItem('musicollAuth', res.headers.get('musicoll-auth'));
-      console.log("you have successfully logged in!")
+      this.router.navigate(['projects']);
     }, (err) => {
+      this.loading = false;
       console.log(err);
     })
   }

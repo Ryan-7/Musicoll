@@ -109,9 +109,6 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     this.audio.src = file;
     this.audio.play();
     this.audioPlaying = true;
-    // Send the index
-    // assign the index to a variable 
-    // Use to hide buttons ngIf*=" this.someVariable === index"
     
   }
 
