@@ -1,6 +1,6 @@
 import { ProjectsComponent } from './../projects.component';
 import { HttpService } from './../../services/http.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import moment from 'moment';
 
@@ -11,12 +11,12 @@ declare var jsPDF; // For use of jsPDF Library.
   templateUrl: './project-detail.component.html',
   styleUrls: ['./project-detail.component.scss']
 })
-export class ProjectDetailComponent implements OnInit {
+export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   @ViewChild('title') title;
   @ViewChild('lyrics') lyrics;
   @ViewChild('notes') notes;
-
+ 
   @ViewChild('audioTracks') audioTracks;
   
   
@@ -109,9 +109,6 @@ export class ProjectDetailComponent implements OnInit {
     this.audio.src = file;
     this.audio.play();
     this.audioPlaying = true;
-    // Send the index
-    // assign the index to a variable 
-    // Use to hide buttons ngIf*=" this.someVariable === index"
     
   }
 
@@ -190,7 +187,7 @@ export class ProjectDetailComponent implements OnInit {
     this.httpService.updateProject(this.projectId, dataToSave).subscribe((res) => {
       
       setTimeout(() => {
-        this.project = res;
+        this.project = res; // if a song is playing, this will cause a bug since it updates the audio view as well.
         this.editingTitle = false;
         this.savingTitle = false;
 
@@ -212,7 +209,10 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.activatedRoute.paramMap.subscribe((params: Params) => {
+
+      this.pause(); // Stop audio if route changes.
       this.loading = true;
       this.projectId = params.get('id');
       
@@ -237,4 +237,5 @@ export class ProjectDetailComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {}
 }

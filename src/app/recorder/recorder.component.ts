@@ -83,7 +83,14 @@ export class RecorderComponent implements OnInit, OnDestroy {
 
   streamSuccess(stream: MediaStream) {
     this.mediaRecorder = new MediaRecorder(stream);
-    this.mediaRecorder.ondataavailable = e => this.chunks.push(e.data);
+    
+    this.mediaRecorder.ondataavailable = (e) => {
+      this.chunks.push(e.data);
+    }
+    
+    //this.mediaRecorder.ondataavailable = e => this.chunks.push(e.data); 
+
+    //this.mediaRecorder.ondataavailable(e); 
   }
 
 

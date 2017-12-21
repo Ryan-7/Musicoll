@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -20,6 +21,7 @@ import { SignupComponent } from './signup/signup.component';
 import { FooterComponent } from './footer/footer.component';
 import { RecorderComponent } from './recorder/recorder.component';
 import { ReversePipe } from './shared/reverse.pipe';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { ReversePipe } from './shared/reverse.pipe';
     FooterComponent,
     Autosize,
     RecorderComponent,
-    ReversePipe
+    ReversePipe,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { ReversePipe } from './shared/reverse.pipe';
     HttpClientModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [HttpService],
+  providers: [HttpService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
