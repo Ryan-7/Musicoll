@@ -92,7 +92,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   deleteProject() {
     this.loading = true;
-    this.httpService.deleteProject(this.projectId).subscribe((res) => {
+    this.httpService.deleteProject(this.projectId, this.project.audio).subscribe((res) => {
 
       setTimeout(() => { // only used to simulate http request time 
         this.projectsComponent.getProjectList(); 

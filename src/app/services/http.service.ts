@@ -24,8 +24,8 @@ export class HttpService {
     return this.httpClient.get('http://localhost:3000/api/projects/' + projectId, {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))});
   }
 
-  deleteProject(projectId) {
-    return this.httpClient.delete('http://localhost:3000/api/projects/' + projectId, {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))});
+  deleteProject(projectId, audioFiles) {
+    return this.httpClient.patch('http://localhost:3000/api/projects/' + projectId, audioFiles, {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))});
   }
 
   updateProject(projectId, dataToSave) {
