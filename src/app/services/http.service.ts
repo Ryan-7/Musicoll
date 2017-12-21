@@ -10,25 +10,26 @@ export class HttpService {
 
 
   // Each project will consist of the following model: 
+  
 
   newProject() {
-    return this.httpClient.get('http://localhost:3000/api/projects/new');
+    return this.httpClient.get('http://localhost:3000/api/projects/new', {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))});
   }
   
   getProjectList() {
-    return this.httpClient.get('http://localhost:3000/api/projects/list');
-  }
+    return this.httpClient.get('http://localhost:3000/api/projects/list', {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))});
+  } 
 
   getProjectById(projectId) {
-    return this.httpClient.get('http://localhost:3000/api/projects/' + projectId);
+    return this.httpClient.get('http://localhost:3000/api/projects/' + projectId, {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))});
   }
 
   deleteProject(projectId) {
-    return this.httpClient.delete('http://localhost:3000/api/projects/' + projectId);
+    return this.httpClient.delete('http://localhost:3000/api/projects/' + projectId, {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))});
   }
 
   updateProject(projectId, dataToSave) {
-    return this.httpClient.patch('http://localhost:3000/api/projects/' + projectId, dataToSave);
+    return this.httpClient.patch('http://localhost:3000/api/projects/' + projectId, dataToSave, {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))});
   }
 
   addAudio(projectId, blob, trackInfo) {
@@ -36,12 +37,12 @@ export class HttpService {
     formData.append('audio', blob);
     formData.append('body', JSON.stringify(trackInfo)); // Needs to be a string for Multer on backend
     console.log(formData);
-    return this.httpClient.post('http://localhost:3000/api/projects/audio/' + projectId, formData); 
+    return this.httpClient.post('http://localhost:3000/api/projects/audio/' + projectId, formData, {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))}); 
   }
 
   deleteAudio(projectId, audioId, audioKey) {
 
-    return this.httpClient.patch('http://localhost:3000/api/projects/audio/' + projectId, {audioId: audioId, audioKey: audioKey})
+    return this.httpClient.patch('http://localhost:3000/api/projects/audio/' + projectId, {audioId: audioId, audioKey: audioKey}, {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))})
   }
 
 }
