@@ -1,6 +1,8 @@
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { tokenNotExpired } from 'angular2-jwt';
+
 
 @Component({
   selector: 'app-header',
@@ -23,7 +25,9 @@ export class HeaderComponent implements OnInit {
 
   }
 
+
   ngOnInit() {
+    console.log(this.authService.loggedIn());
   }
 
 }
