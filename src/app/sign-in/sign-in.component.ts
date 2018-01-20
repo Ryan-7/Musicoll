@@ -22,7 +22,7 @@ export class SignInComponent implements OnInit {
   signin() {
     let userInfo = {
       email: this.email,
-      password: this.password
+      password: this.password 
     }
     this.loading = true;
     this.authService.login(userInfo).subscribe((res) => {

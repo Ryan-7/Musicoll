@@ -31,7 +31,7 @@ export class RecorderComponent implements OnInit, OnDestroy {
   trackDescription: string;
   
   constructor(private httpService: HttpService) { }
-
+ 
   startRecording() {
     this.recording = true;
     this.mediaRecorder.start();
