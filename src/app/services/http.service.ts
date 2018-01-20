@@ -29,7 +29,7 @@ export class HttpService {
   }
 
   updateProject(projectId, dataToSave) {
-    return this.httpClient.patch('http://localhost:3000/api/projects/' + projectId, dataToSave, {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))});
+    return this.httpClient.patch('http://localhost:3000/api/update/projects/' + projectId, dataToSave, {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth'))});
   }
 
   addAudio(projectId, blob, trackInfo) {

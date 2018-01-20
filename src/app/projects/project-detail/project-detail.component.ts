@@ -204,7 +204,7 @@ export class ProjectDetailComponent implements OnInit, OnDestroy {
     })
   }
 
-  updateAudioListing(updatedAudio) {
+  updateAudioListing(updatedAudio) { 
      this.project = updatedAudio;
   }
 
