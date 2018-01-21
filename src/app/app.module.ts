@@ -22,6 +22,8 @@ import { FooterComponent } from './footer/footer.component';
 import { RecorderComponent } from './recorder/recorder.component';
 import { ReversePipe } from './shared/reverse.pipe';
 import { AboutComponent } from './about/about.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { AboutComponent } from './about/about.component';
     Autosize,
     RecorderComponent,
     ReversePipe,
-    AboutComponent
+    AboutComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,7 @@ import { AboutComponent } from './about/about.component';
     HttpClientModule
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
-  providers: [HttpService, AuthService],
+  providers: [HttpService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
