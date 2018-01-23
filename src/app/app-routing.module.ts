@@ -19,7 +19,8 @@ const routes: Routes = [
     { path: 'signin', component: SignInComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'about', component: AboutComponent},
-    { path: 'unauthorized', component: UnauthorizedComponent}
+    { path: 'unauthorized', component: UnauthorizedComponent},
+    { path: '**', redirectTo: '/'}
 ];
 
 @NgModule({
