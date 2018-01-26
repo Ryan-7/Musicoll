@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable() 
 export class AuthService {
@@ -20,5 +21,8 @@ export class AuthService {
     return this.httpClient.delete('http://localhost:3000/api/users/logout', {headers: new HttpHeaders().set('musicoll-auth', localStorage.getItem('musicollAuth')), responseType: 'text'})
   }
 
+  loggedIn() {
+    return tokenNotExpired('musicollAuth');
+  }
 }
   
