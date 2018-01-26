@@ -13,7 +13,7 @@ export class ProjectsComponent implements OnInit {
   projects: any;
   filteredProject: String = "";
 
-
+ 
   constructor(private httpService: HttpService, private activatedRoute: ActivatedRoute, private router: Router) { 
   }
 
