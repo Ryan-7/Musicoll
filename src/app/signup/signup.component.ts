@@ -18,6 +18,7 @@ export class SignupComponent implements OnInit {
 
   working = false;
   redirecting = false;
+  errorMessage = false;
 
   signup() {
     let userInfo = {
@@ -26,19 +27,18 @@ export class SignupComponent implements OnInit {
       password: this.password
     }
     this.working = true;
+    this.errorMessage = false;
 
     this.authService.signup(userInfo).subscribe((res) => {
       localStorage.setItem('musicollAuth', res.headers.get('musicoll-auth')); // Grab the token from the response and set it in local storage.
       
-      setTimeout(() => {    
         this.working = false;
         this.router.navigate(['projects']);
-      }, 2000)
 
 
     }, (err) => {
       this.working = false;
-      console.log('Registration Failed')
+      this.errorMessage = true;
     })
   }
 
