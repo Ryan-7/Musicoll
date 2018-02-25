@@ -1,12 +1,7 @@
 <div class="row justify-content-md-center">
 <div class="col-md-4">
 <form>
-    <p class="h5 text-center mb-4">Sign up</p>
 
-    <div class="md-form">
-        <i class="fa fa-user prefix grey-text"></i>
-        <input type="text" id="orangeForm-name" [(ngModel)]="name" class="form-control" [ngModelOptions]="{standalone: true}" placeholder="First name">
-    </div>
     <div class="md-form">
         <i class="fa fa-envelope prefix grey-text"></i>
         <input type="text" id="orangeForm-email" [(ngModel)]="email" class="form-control" [ngModelOptions]="{standalone: true}" placeholder="Email">
@@ -16,7 +11,7 @@
         <i class="fa fa-lock prefix grey-text"></i>
         <input type="password" id="orangeForm-pass" [(ngModel)]="password" class="form-control" [ngModelOptions]="{standalone: true}" placeholder="Password">
     </div>
-
+    <p class="text-center error-message" *ngIf="errorMessage" >There was a problem with registration. Please ensure you have entered a valid email address.</p>
     <div class="text-center">
         <button class="btn btn-deep-orange" [disabled]="working" (click)="signup()">Sign up</button>
     </div> 

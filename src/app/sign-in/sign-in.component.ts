@@ -14,6 +14,7 @@ export class SignInComponent implements OnInit {
   email: string;
   password: string;
   loading: boolean = false;
+  errorMessage: boolean = false;
   
 
 
@@ -24,6 +25,7 @@ export class SignInComponent implements OnInit {
       email: this.email,
       password: this.password 
     }
+    this.errorMessage = false;
     this.loading = true;
     this.authService.login(userInfo).subscribe((res) => {
       localStorage.clear();
@@ -31,6 +33,7 @@ export class SignInComponent implements OnInit {
       this.router.navigate(['projects']);
     }, (err) => {
       this.loading = false;
+      this.errorMessage = true;
       console.log(err);
     })
   }
