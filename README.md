@@ -14,5 +14,5 @@ AWS S3 for storage. Heroku for hosting
 
 <img src="https://media.giphy.com/media/47K2ltijuw5ACOIVsT/giphy.gif" style="width: 600px;" alt="musicoll_1" border="0">
 
-<img src="https://i.imgur.com/lELXAYe.gifv">
+<img src="https://i.imgur.com/lELXAYe.gif">
 
