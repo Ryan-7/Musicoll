@@ -12,5 +12,4 @@ JWT for Authentication
 
 AWS S3 for storage. Heroku for hosting
 
-<img src="https://preview.ibb.co/ifZVn7/musicoll_1.png" alt="musicoll_1" border="0">
-<img src="https://preview.ibb.co/kaYefS/musicoll_2.png" alt="musicoll_2" border="0">
+<img src="https://media.giphy.com/media/47K2ltijuw5ACOIVsT/giphy.gif" alt="musicoll_1" border="0">
